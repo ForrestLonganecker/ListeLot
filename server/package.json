@@ -4,12 +4,13 @@
   "description": "ListeLot server",
   "main": "index.js",
   "scripts": {
-    "start": "node src/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/server.js",
+    "test": "export NODE_ENV=test && jasmine"
   },
   "author": "Forrest Longanecker",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.19.0",
     "express": "^4.17.1",
     "pg": "^7.11.0",
     "pg-hstore": "^2.3.3",
