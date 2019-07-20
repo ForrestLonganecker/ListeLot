@@ -3,7 +3,7 @@
 ---
 
 To get started please clone the repo and navigate into that directory ie:  
-`$cd /path/tothe/cloned/repo`  
+`$cd /path/to/the/cloned/repo`  
 
 Ensure you have _npm_ and _Node_ installed:  
 
