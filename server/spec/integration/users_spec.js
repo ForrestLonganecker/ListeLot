@@ -69,14 +69,13 @@ describe('routes: users', () => {
 
       axios.post(`${base}create`, data)
       .then((res) => {
-        console.log(res);
-        expect(res.err).toContain('error');
+        expect(res.data).toBe('email already in use');
+        expect(res.statusCode).toBe(400);
         expect(res.data.email).toBeNull();
         done();
       })
       .catch((err) => {
-        console.log(err);
-        expect(err).toContain('error');
+        expect(err.isAxiosError).toBeTruthy();
         done();
       });
     });
