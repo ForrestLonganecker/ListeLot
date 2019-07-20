@@ -1,0 +1,5 @@
+{
+    "scripts": {
+    "createdb": "createdb -U postgres -w listelot-dev && createdb -U postgres -w listelot-test"
+  }
+}
