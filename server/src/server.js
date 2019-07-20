@@ -1,11 +1,12 @@
-const express = require('express');
-const app = express();
+const app = require('./app');
+const http = require('http');
+
 const port = 4000;
 
-app.get('/', (req, res) => {
-  res.send('Hello ListeLot!');
-});
+const server = http.createServer(app);
 
-app.listen(port, () => {
-  console.log(`ListeLot listening on port ${port}`);
+server.listen(port);
+
+server.on('listening', () => {
+  console.log(`ListeLot listening on port ${port}`);  
 });
