@@ -5,14 +5,18 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/server.js",
-    "test": "export NODE_ENV=test && jasmine"
+    "test": "export NODE_ENV=test && jasmine",
+    "env": "cp example.env .env"
   },
   "author": "Forrest Longanecker",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.0",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
+    "dotenv": "^8.0.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.13",
     "pg": "^7.11.0",
     "pg-hstore": "^2.3.3",
