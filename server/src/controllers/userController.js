@@ -15,7 +15,7 @@ module.exports = {
         res.status(400);
         res.send(err);
       } else {
-
+        
         if(authHelpers.comparePasswords(req.body.password, user.password)){
           // If password matches create a jwt and send it to front end
           let data = authHelpers.createToken(user.email);

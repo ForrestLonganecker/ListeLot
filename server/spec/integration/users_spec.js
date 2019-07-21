@@ -7,18 +7,30 @@ const base = 'http://localhost:4000/users/';
 
 describe('routes: users', () => {
 
+
   beforeEach((done) => {
     this.user;
 
     sequelize.sync({force: true})
     .then(() => {
-      User.create({
+
+      let data = {
         email: 'test@email.com',
         password: '123456'
-      })
-      .then((user) => {
-        this.user = user;
-        done();
+      };
+
+      axios.post(`${base}create`, data)
+      .then(() => {
+
+        User.findOne({where: {email: 'test@email.com'}})
+        .then((user) => {
+          this.user = user;
+          done();
+        })
+        .catch((err) => {
+          console.log(err);
+          done();
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -42,9 +54,8 @@ describe('routes: users', () => {
       };
 
       axios.post(`${base}create`, data)
-      .then((res) => {
-        this.newUser = res.data;
-        User.findByPk(this.newUser.id)
+      .then(() => {
+        User.findOne({where: {email: 'some@email.com'}})
         .then((user) => {
           expect(user.email).toBe('some@email.com');
           expect(user.id).toBe(2);

@@ -14,7 +14,7 @@ module.exports = {
   createToken(email){
     let token = jwt.sign(
       { email: email },
-      process.env.JWT_SECRECT,
+      process.env.JWT_SECRET,
       { expiresIn: 14400 }
     );
     return token;
