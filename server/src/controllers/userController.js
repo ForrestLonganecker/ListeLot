@@ -28,4 +28,22 @@ module.exports = {
       };
     });
   },
+  logIn(req, res){
+    userQueries.getUser(req.body.email, (err, user) => {
+      if(err){
+        res.status(400);
+        res.send(err);
+      } else {
+
+        if(authHelpers.comparePasswords(req.body.password, user.password)){
+          let data = authHelpers.createToken(user.email);
+          res.send(data);
+        } else {
+          res.status(400);
+          let err = {message: 'Log in credentials do not match.'};
+          res.send(err);
+        };
+      };
+    });
+  },
 };

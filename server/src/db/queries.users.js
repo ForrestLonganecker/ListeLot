@@ -20,4 +20,15 @@ module.exports = {
       };
     });
   },
+  getUser(email, callback){
+    User.findOne({where: {email: email}})
+    .then((user) => {
+      if(user){
+        callback(null, user);
+      }
+    })
+    .catch((err) => {
+      callback(err);
+    });
+  },
 };

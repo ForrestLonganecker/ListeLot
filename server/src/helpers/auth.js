@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const jwtDecode = require('jwt-decode');
 
 module.exports = {
   encryptPassword(inputPassword){
@@ -18,5 +19,9 @@ module.exports = {
       { expiresIn: 14400 }
     );
     return token;
+  },
+  decode(token){
+    let decoded = jwtDecode(token);
+    return decoded;
   },
 };

@@ -1,6 +1,7 @@
 const axios = require('axios');
 const server = require('../../src/server');
 
+const authHelpers = require('../../src/helpers/auth');
 const sequelize = require('../../src/db/models/index').sequelize;
 const User = require('../../src/db/models').User;
 const base = 'http://localhost:4000/users/';
@@ -93,6 +94,29 @@ describe('routes: users', () => {
 
     // END USER CREATE SPEC
   });
+
+  describe('POST /users/login', () => {
+    it('should return a jwt token upon successful authentication', (done) => {
+      let data = {
+        email: 'test@email.com',
+        password: '123456'
+      };
+
+      axios.post(`${base}login`, data)
+      .then((res) => {
+        let token = authHelpers.decode(res.data);
+        expect(token.email).toBe('test@email.com');
+        done();
+      })
+      .catch((err) => {
+        expect(err).toBeNull();
+        done();
+      });
+    });
+
+    // END USER LOGIN SPEC
+  });
+
 
   // END USER INTEGRATION SPEC
 });
