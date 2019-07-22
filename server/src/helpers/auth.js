@@ -23,11 +23,19 @@ module.exports = {
     // checks jwt token for secret
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      // if secret is contained return decoded payload(email)
+      // if secret is contained return decoded token
+      
       return decoded;
     } catch(err) {
       // if secret is wrong return false
       return false;
     };
+  },
+  hasToken(req){
+    // parse the token from the auth.string "Bearer ASgdASgAeGshT.uhuioSeGewvaVR.DfyTgerwe"
+    let token = req.headers['authorization'].split(' ')[1];
+
+
+     return this.authenticated(token);
   }
 };

@@ -2,7 +2,7 @@
 
 const logger = require('morgan');
 const bodyParser = require('body-parser');
-
+const authHelpers = require('../helpers/auth');
 
 module.exports = {
   init(app, express){

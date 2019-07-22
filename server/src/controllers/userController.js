@@ -46,4 +46,26 @@ module.exports = {
       };
     });
   },
+  authenticate(req, res){
+    let token = authHelpers.hasToken(req);
+    // check for a token
+    if(token){
+      // if there is a token check for a user
+      userQueries.getUser(token.email, (err, user) => {
+        if(err){
+          res.status(400);
+          let err = {message: 'Not authenticated'};
+          res.send(err);
+        } else {
+          // if there is a user create a new token with the user.email and send it
+          let data = authHelpers.createToken(user.email);
+          res.send(data);
+        }
+      });
+    } else {
+      res.status(400);
+      let err = {message: 'Not authenticated'};
+      res.send(err);
+    };
+  },
 };
