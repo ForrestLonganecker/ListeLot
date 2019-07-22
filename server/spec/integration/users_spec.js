@@ -104,7 +104,7 @@ describe('routes: users', () => {
 
       axios.post(`${base}login`, data)
       .then((res) => {
-        let token = authHelpers.decode(res.data);
+        let token = authHelpers.authenticated(res.data);
         expect(token.email).toBe('test@email.com');
         done();
       })
@@ -116,6 +116,10 @@ describe('routes: users', () => {
 
     // END USER LOGIN SPEC
   });
+
+  // describe('GET /users/authenticated', ()) => {
+  //   it()
+  // }
 
 
   // END USER INTEGRATION SPEC

@@ -1,6 +1,5 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const jwtDecode = require('jwt-decode');
 
 module.exports = {
   encryptPassword(inputPassword){
@@ -13,15 +12,22 @@ module.exports = {
     return bcrypt.compareSync(inputPassword, databasePassword);
   },
   createToken(email){
-    let token = jwt.sign(
+    const token = jwt.sign(
       { email: email },
       process.env.JWT_SECRET,
       { expiresIn: 14400 }
     );
     return token;
   },
-  decode(token){
-    let decoded = jwtDecode(token);
-    return decoded;
-  },
+  authenticated(token){
+    // checks jwt token for secret
+    try {
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      // if secret is contained return decoded payload(email)
+      return decoded;
+    } catch(err) {
+      // if secret is wrong return false
+      return false;
+    };
+  }
 };
