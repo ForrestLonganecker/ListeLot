@@ -32,6 +32,7 @@ module.exports = {
     userQueries.getUser(req.body.email, (err, user) => {
       if(err){
         res.status(400);
+        res.statusMessage = 'Log in credentials do not match';
         res.send(err);
       } else {
 
@@ -40,32 +41,32 @@ module.exports = {
           res.send(data);
         } else {
           res.status(400);
-          let err = {message: 'Log in credentials do not match.'};
+          res.statusMessage = 'Log in credentials do not match.';
           res.send(err);
         };
       };
     });
   },
-  authenticate(req, res){
+  async authenticate(req, res){
+    // if there is a token that matches in the req return it, else false
     let token = authHelpers.hasToken(req);
-    // check for a token
     if(token){
-      // if there is a token check for a user
+      // check for user in db
       userQueries.getUser(token.email, (err, user) => {
         if(err){
           res.status(400);
-          let err = {message: 'Not authenticated'};
+          res.statusMessage = 'Not authenticated';
           res.send(err);
         } else {
-          // if there is a user create a new token with the user.email and send it
-          let data = authHelpers.createToken(user.email);
-          res.send(data);
-        }
+          // if user exists in db create a new token and send it to the front
+          let newToken = authHelpers.createToken(user.email);
+          res.send(newToken);
+        };
       });
     } else {
       res.status(400);
-      let err = {message: 'Not authenticated'};
-      res.send(err);
+      res.statusMessage = 'Not authenticated';
+      res.send();
     };
   },
 };

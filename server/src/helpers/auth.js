@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const userQueries = require('../db/queries.users');
 
 module.exports = {
   encryptPassword(inputPassword){
@@ -19,7 +20,7 @@ module.exports = {
     );
     return token;
   },
-  authenticated(token){
+  decode(token){
     // checks jwt token for secret
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -36,9 +37,9 @@ module.exports = {
       // parse the token from the auth.string "Bearer ASgdASgAeGshT.uhuioSeGewvaVR.DfyTgerwe"
       let token = req.headers['authorization'].split(' ')[1];
 
-       return this.authenticated(token);
+      return this.decode(token);
     } else {
       return false;
-    }
-  }
+    };
+  },
 };

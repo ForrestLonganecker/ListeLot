@@ -108,7 +108,7 @@ describe('routes: users', () => {
 
       axios.post(`${base}login`, data)
       .then((res) => {
-        let token = authHelpers.authenticated(res.data);
+        let token = authHelpers.decode(res.data);
         expect(token.email).toBe('test@email.com');
         done();
       })
@@ -121,19 +121,20 @@ describe('routes: users', () => {
     // END USER LOGIN SPEC
   });
 
-  describe('GET /users/authenticated', () => {
+  describe('GET /users/authenticate', () => {
     it('should authenticate requests that contain the token in the authbearer header', (done) => {
       // set axios default header to contain the token
       axios.defaults.headers.common = {'Authorization': `Bearer ${this.token}`}
       axios.get(`${base}authenticate`)
       .then((res) => {
-        let token = authHelpers.authenticated(res.data);
+        let token = authHelpers.decode(res.data);
         expect(token.email).toBe('test@email.com');
         // remove the default headers from the req
         delete axios.defaults.headers.common['Authorization'];
         done();
       })
       .catch((err) => {
+        console.log(err.request);
         expect(err).toBeNull();
         done();
       });
