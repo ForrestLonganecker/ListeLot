@@ -1,6 +1,5 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const userQueries = require('../db/queries.users');
 
 module.exports = {
   encryptPassword(inputPassword){
