@@ -129,6 +129,8 @@ describe('routes: users', () => {
       .then((res) => {
         let token = authHelpers.authenticated(res.data);
         expect(token.email).toBe('test@email.com');
+        // remove the default headers from the req
+        delete axios.defaults.headers.common['Authorization'];
         done();
       })
       .catch((err) => {
@@ -138,8 +140,7 @@ describe('routes: users', () => {
     });
 
     it('should not authenticate requests that are missing a token', (done) => {
-      // set axios default header to contain the token
-      axios.defaults.headers.common = {'Authorization': `Bearer ${null}`}
+      // no axios headers provided
       axios.get(`${base}authenticate`)
       .then((res) => {
         // expect nothing to happen here

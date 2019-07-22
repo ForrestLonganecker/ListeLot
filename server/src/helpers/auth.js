@@ -32,10 +32,13 @@ module.exports = {
     };
   },
   hasToken(req){
-    // parse the token from the auth.string "Bearer ASgdASgAeGshT.uhuioSeGewvaVR.DfyTgerwe"
-    let token = req.headers['authorization'].split(' ')[1];
+    if(req.headers['authorization']){
+      // parse the token from the auth.string "Bearer ASgdASgAeGshT.uhuioSeGewvaVR.DfyTgerwe"
+      let token = req.headers['authorization'].split(' ')[1];
 
-
-     return this.authenticated(token);
+       return this.authenticated(token);
+    } else {
+      return false;
+    }
   }
 };
