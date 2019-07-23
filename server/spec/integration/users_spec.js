@@ -59,7 +59,10 @@ describe('routes: users', () => {
       };
 
       axios.post(`${base}create`, data)
-      .then(() => {
+      .then((res) => {
+        // check response cookie
+        let decodedEmail = authHelpers.decode(res.data).email;
+        expect(decodedEmail).toBe('some@email.com');
         User.findOne({where: {email: 'some@email.com'}})
         .then((user) => {
           expect(user.email).toBe('some@email.com');
@@ -76,6 +79,30 @@ describe('routes: users', () => {
         done();
       });
     });
+    // it('should create a user with the specified email and password', (done) => {
+    //   let data = {
+    //     email: 'some@email.com',
+    //     password: '123456'
+    //   };
+
+    //   axios.post(`${base}create`, data)
+    //   .then(() => {
+    //     User.findOne({where: {email: 'some@email.com'}})
+    //     .then((user) => {
+    //       expect(user.email).toBe('some@email.com');
+    //       expect(user.id).toBe(2);
+    //       done();
+    //     })
+    //     .catch((err) => {
+    //       expect(err).toBeNull();
+    //       done();
+    //     });
+    //   })
+    //   .catch((err) => {
+    //     expect(err).toBeNull();
+    //     done();
+    //   });
+    // });
 
     it('should not create a user with a duplicate email', (done) => {
       let data = {
