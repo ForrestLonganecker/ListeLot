@@ -11,7 +11,7 @@ const Authenticated = ({ setIsAuthenticated }) => {
   };
 
   return(
-    <div>
+    <div className="authenticated-container">
       <h1>You are Authenticated and logged in</h1>
       <button className="secondary-button" type="button" onClick={() => handleLogOut()}>Log out</button>
     </div>
