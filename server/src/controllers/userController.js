@@ -12,7 +12,6 @@ module.exports = {
 
     userQueries.createUser(newUser, (err, user) => {
       if(err){
-        console.log('error')
         res.status(400);
         res.statusMessage = err.message;
         res.end()
@@ -21,7 +20,6 @@ module.exports = {
         if(authHelpers.comparePasswords(req.body.password, user.password)){
           // If password matches create a jwt and send it to front end
           let data = authHelpers.createToken(user.email);
-          console.log(data);
           res.send(data);
         } else {
           res.status(400);

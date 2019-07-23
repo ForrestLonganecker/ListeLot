@@ -1,8 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
 
-
-
 import './NotAuthenticated.css';
 
 import LogIn from '../LogIn/LogIn';
