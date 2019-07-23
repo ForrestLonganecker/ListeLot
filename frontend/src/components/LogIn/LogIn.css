@@ -1,0 +1,15 @@
+.log-in-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.log-in-form{
+  display: flex;
+  flex-direction: column;
+}
+
+.button-container{
+  display: flex;
+  justify-content: space-around;
+}
