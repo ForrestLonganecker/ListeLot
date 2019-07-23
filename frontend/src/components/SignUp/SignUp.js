@@ -15,13 +15,13 @@ const SignUp = ({ setActiveView }) => {
     <div className="sign-up-container">
       <h1>Sign up!</h1>
       <form className="sign-up-form">
-        <input type="text" placeholder="Enter email address" onChange={(e) => setEmail(e.target.value)} />
-        <input type="password" placeholder="Enter password" onChange={(e) => setPassword(e.target.value)} />
-        <input type="password" placeholder="Confirm password" onChange={(e) => setPasswordConfirmation(e.target.value)} />
+        <input className="sign-up-input" type="text" placeholder="Enter email address" onChange={(e) => setEmail(e.target.value)} />
+        <input className="sign-up-input" type="password" placeholder="Enter password" onChange={(e) => setPassword(e.target.value)} />
+        <input className="sign-up-input" type="password" placeholder="Confirm password" onChange={(e) => setPasswordConfirmation(e.target.value)} />
 
         <div className="button-container">
-        <button type="submit">Log in</button>
-        <button type="button" onClick={() => setActiveView('log in')}>Log in?</button>
+        <button className="main-button" type="submit">Sign up</button>
+        <button className="secondary-button" type="button" onClick={() => setActiveView('log in')}>Log in?</button>
         </div>
       </form>
     </div>

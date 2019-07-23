@@ -9,7 +9,47 @@
   flex-direction: column;
 }
 
+.log-in-input{
+  height: 30px;
+  width: 200px;
+  margin-top: 30px;
+  font-size: 16px;
+  background-color: #EEFFDD;
+  color: #003300;
+}
+
+.log-in-input::placeholder{
+  font-size: 16px !important;
+  background-color: #EEFFDD !important;
+  color: #003300 !important;
+}
+
+.log-in-input:-webkit-autofill,
+.log-in-input:-webkit-autofill:hover, 
+.log-in-input:-webkit-autofill:focus{
+  -webkit-text-fill-color: #003300;
+  -webkit-box-shadow: 0 0 0px 1000px #EEFFDD inset;
+}
+
 .button-container{
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
+  margin-top: 30px;
+}
+
+.main-button{
+  height: 30px;
+  width: 90px;
+  background-color: #7700ee;
+  color: #FFFFFF;
+  border-radius: 3px;
+  font-size: 18px;
+}
+
+.secondary-button{
+  height: 30px;
+  width: 90px;
+  background-color: #EEFFDD;
+  border-radius: 3px;
+  font-size: 18px;
 }

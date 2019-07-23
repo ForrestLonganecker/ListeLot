@@ -23,7 +23,9 @@ function App() {
 // </div>
 
   return (
-    <Authenticator />
+    <div className="App">
+      <Authenticator />
+    </div>
   );
 }
 
