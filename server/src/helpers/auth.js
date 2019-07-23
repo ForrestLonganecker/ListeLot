@@ -24,7 +24,6 @@ module.exports = {
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
       // if secret is contained return decoded token
-      
       return decoded;
     } catch(err) {
       // if secret is wrong return false

@@ -8,18 +8,18 @@ import './NotAuthenticated.css';
 import LogIn from '../LogIn/LogIn';
 import SignUp from '../SignUp/SignUp';
 
-const NotAuthenticated = () => {
+const NotAuthenticated = ({ setIsAuthenticated }) => {
 
   const [activeView, setActiveView] = useState('');
 
   const handleDisplay = (view) => {
     switch(view){
       case 'log in':
-        return <LogIn setActiveView={setActiveView} />;
+        return <LogIn setActiveView={setActiveView} setIsAuthenticated={setIsAuthenticated} />;
       case 'sign up':
-        return <SignUp setActiveView={setActiveView} />;
+        return <SignUp setActiveView={setActiveView} setIsAuthenticated={setIsAuthenticated} />;
       default:
-        return <LogIn setActiveView={setActiveView} />;
+        return <LogIn setActiveView={setActiveView} setIsAuthenticated={setIsAuthenticated} />;
     };
   };
 

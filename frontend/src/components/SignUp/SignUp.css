@@ -29,6 +29,7 @@
 .sign-up-input:-webkit-autofill:focus{
   -webkit-text-fill-color: #EEFFDD;
   -webkit-box-shadow: 0 0 0px 1000px #005511 inset;
+  box-shadow: 0 0 0px 1000px #005511 inset;
 }
 
 .button-container{

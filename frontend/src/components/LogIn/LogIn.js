@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import './LogIn.css';
 
-const LogIn = ({ setActiveView }) => {
+const LogIn = ({ setActiveView, setIsAuthenticated }) => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
