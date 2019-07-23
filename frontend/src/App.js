@@ -2,7 +2,6 @@ import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import Authenticator from './components/Authenticator/Authenticator';
-require('dotenv').config();
 
 function App() {
 //   <div className="App">

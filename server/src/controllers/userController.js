@@ -12,18 +12,21 @@ module.exports = {
 
     userQueries.createUser(newUser, (err, user) => {
       if(err){
+        console.log('error')
         res.status(400);
-        res.send(err);
+        res.statusMessage = err.message;
+        res.end()
       } else {
         
         if(authHelpers.comparePasswords(req.body.password, user.password)){
           // If password matches create a jwt and send it to front end
           let data = authHelpers.createToken(user.email);
+          console.log(data);
           res.send(data);
         } else {
           res.status(400);
-          let err = {message: 'Log in credentials do not match.'};
-          res.send(err);
+          res.statusMessage = 'Log in credentials do not match.';
+          res.end();
         };
       };
     });
@@ -32,8 +35,8 @@ module.exports = {
     userQueries.getUser(req.body.email, (err, user) => {
       if(err){
         res.status(400);
-        res.statusMessage = 'Log in credentials do not match';
-        res.send(err);
+        res.statusMessage = 'Log in credentials do not match.';
+        res.end();
       } else {
 
         if(authHelpers.comparePasswords(req.body.password, user.password)){
@@ -42,12 +45,12 @@ module.exports = {
         } else {
           res.status(400);
           res.statusMessage = 'Log in credentials do not match.';
-          res.send(err);
+          res.end();
         };
       };
     });
   },
-  async authenticate(req, res){
+  authenticate(req, res){
     // if there is a token that matches in the req return it, else false
     let token = authHelpers.hasToken(req);
     if(token){

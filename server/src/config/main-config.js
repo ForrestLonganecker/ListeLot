@@ -2,11 +2,12 @@
 
 const logger = require('morgan');
 const bodyParser = require('body-parser');
-const authHelpers = require('../helpers/auth');
+const cors = require('cors');
 
 module.exports = {
   init(app, express){
     app.use(logger('dev'));
+    app.use(cors());
     app.use(bodyParser.json());
   }
 };

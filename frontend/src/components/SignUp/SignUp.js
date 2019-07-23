@@ -4,12 +4,10 @@ import axios from 'axios';
 
 import './SignUp.css';
 
-import authHelpers from '../../helpers/auth.js';
-
-const signUpUrl = process.env.JWT_SECRET;
+const signUpUrl = 'http://localhost:4000/users/create';
 
 const SignUp = ({ setActiveView, setIsAuthenticated }) => {
-
+  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
@@ -23,19 +21,23 @@ const SignUp = ({ setActiveView, setIsAuthenticated }) => {
         password: password.trim()
       };
 
-      axios.post(signUpUrl, data)
-      .then((res) => {
-        let authenticated = authHelpers.authenticate(res.data);
-        if(authenticated){
-          setIsAuthenticated(true);
-          alert('Thanks for signing up!');
-        } else {
-          alert(`Status code: ${res.statusCode}\nerror message: ${res.statusMessage}`);
-        }
-      })
-      .catch((err) => {
-        alert('error while sending request:\n', err);
-      })
+      console.log(signUpUrl);
+      try {
+        const res = axios.post(signUpUrl, data); 
+          if(res.statusCode === 400){
+            console.log('res status code 400');
+            alert(`Status code: ${res.statusCode}\nerror message: ${res.statusMessage}`);
+          } else {
+            setIsAuthenticated(true);
+            localStorage.setItem('token', res.data);
+            console.log('signed up');
+            alert('Thanks for signing up!');
+          }
+      } catch(err) {
+        console.log('eroroororoorooroororoororooroororoor');
+        console.log(err);
+        alert('error while sending request:\n' + err.message);
+      };
     };
   };
 
