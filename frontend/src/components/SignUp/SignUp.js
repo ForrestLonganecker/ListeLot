@@ -21,21 +21,16 @@ const SignUp = ({ setActiveView, setIsAuthenticated }) => {
         password: password.trim()
       };
 
-      console.log(signUpUrl);
       try {
         const res = axios.post(signUpUrl, data); 
           if(res.statusCode === 400){
-            console.log('res status code 400');
             alert(`Status code: ${res.statusCode}\nerror message: ${res.statusMessage}`);
           } else {
             setIsAuthenticated(true);
             localStorage.setItem('token', res.data);
-            console.log('signed up');
             alert('Thanks for signing up!');
           }
       } catch(err) {
-        console.log('eroroororoorooroororoororooroororoor');
-        console.log(err);
         alert('error while sending request:\n' + err.message);
       };
     };

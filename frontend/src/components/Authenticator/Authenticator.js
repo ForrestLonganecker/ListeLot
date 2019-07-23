@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 
 import NotAuthenticated from '../NotAuthenticated/NotAuthenticated';
+import Authenticated from '../Authenticated/Authenticated';
 
 const Authenticator = () => {
 
@@ -12,7 +13,7 @@ const Authenticator = () => {
       case false:
         return <NotAuthenticated setIsAuthenticated={setIsAuthenticated} />;
       case true:
-        return <div>authenticated</div>;
+        return <Authenticated setIsAuthenticated={setIsAuthenticated} />;
       default:
         return <NotAuthenticated setIsAuthenticated={setIsAuthenticated} />;
     }
