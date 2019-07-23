@@ -16,12 +16,14 @@
   font-size: 16px;
   background-color: #005511;
   color: #EEFFDD;
+  padding-left: 5px;
 }
 
 .log-in-input::placeholder{
   font-size: 16px;
   background-color: #005511;
   color: #EEFFDD;
+  padding-left: 5px;
 }
 
 .log-in-input:-webkit-autofill,
@@ -29,6 +31,8 @@
 .log-in-input:-webkit-autofill:focus{
   -webkit-text-fill-color: #EEFFDD;
   -webkit-box-shadow: 0 0 0px 1000px #005511 inset;
+  box-shadow: 0 0 0px 1000px #005511 inset;
+  padding-left: 5px;
 }
 
 .button-container{
