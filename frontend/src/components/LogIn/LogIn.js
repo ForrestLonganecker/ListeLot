@@ -17,21 +17,23 @@ const LogIn = ({ setActiveView, setIsAuthenticated }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogIn = () => {
+  const handleLogIn = async (e) => {
+    e.preventDefault();
+
     let data = {
       email: email.toLowerCase().trim(),
       password: password.trim()
     };
 
     try {
-      const res = axios.post(logInUrl, data);
-
-      if(res.statusCode === 400){
-        alert('Error when logging in: ' + res.statusMessage)
-      } else {
+      const res = await axios.post(logInUrl, data);
+      console.log('Res from axios.post: ', res.statusMessage);
+      if(res.status === 200){
         localStorage.setItem('token', res.data);
         setIsAuthenticated(true);
         alert('Welcome back!');
+      } else {
+        alert('Error when logging in: ' + res.statusMessage)
       };
     } catch(err) {
       alert('error: ' + err.message);
