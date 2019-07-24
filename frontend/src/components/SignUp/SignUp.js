@@ -4,7 +4,13 @@ import axios from 'axios';
 
 import './SignUp.css';
 
-const signUpUrl = 'http://localhost:4000/users/create';
+let signUpUrl;
+if(process.env.NODE_ENV === 'production'){
+  signUpUrl = 'https://listelot.herokuapp.com/users/create'
+}
+if(process.env.NODE_ENV === 'development'){
+  signUpUrl = 'http://localhost:4000/users/create'; 
+}
 
 const SignUp = ({ setActiveView, setIsAuthenticated }) => {
   

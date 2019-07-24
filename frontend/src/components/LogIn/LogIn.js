@@ -4,7 +4,13 @@ import axios from 'axios';
 
 import './LogIn.css';
 
-const logInUrl = 'http://localhost:4000/users/logIn';
+let logInUrl;
+if(process.env.NODE_ENV === 'production'){
+  logInUrl = 'https://listelot.herokuapp.com/users/logIn'
+}
+if(process.env.NODE_ENV === 'development'){
+  logInUrl = 'http://localhost:4000/users/logIn'; 
+}
 
 const LogIn = ({ setActiveView, setIsAuthenticated }) => {
 

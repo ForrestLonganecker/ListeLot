@@ -11,7 +11,7 @@ const NotAuthenticated = ({ setIsAuthenticated }) => {
   const [activeView, setActiveView] = useState('');
 
   const handleDisplay = (view) => {
-    console.log(process.env.NODE_ENV);
+  
     switch(view){
       case 'log in':
         return <LogIn setActiveView={setActiveView} setIsAuthenticated={setIsAuthenticated} />;
