@@ -20,10 +20,11 @@
   "production": {
     "username": "postgres",
     "password": null,
-    "database": "database_production",
+    "database": "listelot-production",
     "host": "127.0.0.1",
     "dialect": "postgres",
     "operatorAliases": false,
-    "logging": false
+    "logging": false,
+    "use_env_variable": "DATABASE_URL"
   }
 }
