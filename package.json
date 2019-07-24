@@ -1,6 +1,6 @@
 {
     "scripts": {
       "createdb": "createdb -U postgres -w listelot-dev && createdb -U postgres -w listelot-test",
-      "heroku deploy": "git subtree push --prefix server heroku master"
+      "heroku-deploy": "git subtree push --prefix server heroku master"
   }
 }
