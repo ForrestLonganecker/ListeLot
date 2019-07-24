@@ -18,7 +18,9 @@ const SignUp = ({ setActiveView, setIsAuthenticated }) => {
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
 
-  const handleSignUp = () => {
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+
     if(password !== passwordConfirmation){
       alert('Passwords does not match confirmation.');
     } else {
@@ -28,13 +30,14 @@ const SignUp = ({ setActiveView, setIsAuthenticated }) => {
       };
 
       try {
-        const res = axios.post(signUpUrl, data); 
-          if(res.statusCode === 400){
-            alert(`Status code: ${res.statusCode}\nerror message: ${res.statusMessage}`);
-          } else {
+        const res = await axios.post(signUpUrl, data); 
+          if(res.status === 200){
             setIsAuthenticated(true);
             localStorage.setItem('token', res.data);
             alert('Thanks for signing up!');
+          } else {
+            console.log(res)
+            alert(`Status code: ${res.status}\nerror message: ${res.statusText}`);
           }
       } catch(err) {
         alert('error while sending request:\n' + err.message);

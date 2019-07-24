@@ -23,7 +23,7 @@ module.exports = {
           res.send(data);
         } else {
           res.status(400);
-          res.statusText('Log in credentials do not match.');
+          res.statusMessage = 'Log in credentials do not match.';
           res.end();
         };
       };
@@ -39,11 +39,11 @@ module.exports = {
 
         if(authHelpers.comparePasswords(req.body.password, user.password)){
           let data = authHelpers.createToken(user.email);
-          console.log('success login: ', data);
           res.send(data);
-          console.log('after res.send');
         } else {
+          // status comes through as res.status
           res.status(400);
+          // statusMessage comes through as res.statusText
           res.statusMessage = 'Log in credentials do not match.';
           res.end();
         };

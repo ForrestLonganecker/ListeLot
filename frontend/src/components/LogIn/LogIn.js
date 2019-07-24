@@ -27,16 +27,15 @@ const LogIn = ({ setActiveView, setIsAuthenticated }) => {
 
     try {
       const res = await axios.post(logInUrl, data);
-      console.log('Res from axios.post: ', res.statusMessage);
       if(res.status === 200){
         localStorage.setItem('token', res.data);
         setIsAuthenticated(true);
         alert('Welcome back!');
       } else {
-        alert('Error when logging in: ' + res.statusMessage)
+        alert('Error when logging in: ' + res.statusText)
       };
     } catch(err) {
-      alert('error: ' + err.message);
+      alert('error while sending request:\n' + err.message);
     };
   };
 

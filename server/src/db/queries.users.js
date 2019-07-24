@@ -25,6 +25,9 @@ module.exports = {
     .then((user) => {
       if(user){
         callback(null, user);
+      } else {
+        let err = 'Match not found.';
+        callback(err);
       }
     })
     .catch((err) => {
