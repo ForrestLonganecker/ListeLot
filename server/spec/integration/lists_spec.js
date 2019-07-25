@@ -87,6 +87,7 @@ describe('routes: lists', () => {
         axios.post(`${base}create`, data)
         .then((res) => {
           // expect errors
+          expect(res).toBeNull();
           done();
         })
         .catch((err) => {
@@ -183,7 +184,7 @@ describe('routes: lists', () => {
         });
       });
 
-      fit('should not update the specified list if not authorized', (done) => {
+      it('should not update the specified list if not authorized', (done) => {
         let updateInfo = {
           updatedTitle: 'updated title',
           listId: this.list.id
@@ -192,6 +193,7 @@ describe('routes: lists', () => {
         axios.post(`${base}update`, updateInfo)
         .then(() => {
           // expect errors
+          expect(res).toBeNull();
           done();
         })
         .catch((err) => {
@@ -206,7 +208,32 @@ describe('routes: lists', () => {
     describe('GET /lists', () => {
       
       it('should get all the lists for the authenticated user', (done) => {
+        axios.defaults.headers.common = {'Authorization': `Bearer ${this.token}`};
+        axios.get(`${base}getAll`)
+        .then((res) => {
+          delete axios.defaults.headers.common['Authorization'];
+          expect(res.data[0].title).toBe('test list');
+          expect(res.data[0].userId).toBe(undefined);
+          done();
+        })
+        .catch((err) => {
+          expect(err).toBeNull();
+          done();
+        });
+      });
 
+      it('should not get any lists for a non-authenticated user', (done) => {
+        axios.get(`${base}getAll`)
+        .then((res) => {
+          // expect errors
+          expect(res).toBeNull();
+          done();
+        })
+        .catch((err) => {
+          expect(err.request.res.statusMessage).toBe('error when authenticating');
+          expect(err.isAxiosError).toBeTruthy();
+          done();
+        });
       });
 
       // END GET LISTS TEST

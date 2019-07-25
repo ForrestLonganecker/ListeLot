@@ -7,4 +7,6 @@ router.post('/lists/create', listController.create);
 router.post('/lists/delete', listController.delete);
 router.post('/lists/update', listController.update);
 
+router.get('/lists/getAll', listController.getAll);
+
 module.exports = router;

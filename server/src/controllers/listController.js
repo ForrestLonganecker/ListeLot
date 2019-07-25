@@ -101,4 +101,31 @@ module.exports = {
       res.end();
     };
   },
+  getAll(req, res){
+    let token = authHelpers.hasToken(req);
+
+    if(token){
+      userQueries.getUser(token.email, (err, user) => {
+        if(err){
+          res.status(400);
+          res.statusMessage = 'error when authenticating';
+          res.end();
+        } else {
+          listQueries.getAll(user.id, (err, lists) => {
+            if(err){
+              res.status(400);
+              res.statusMessage = 'error fetching lists';
+              res.end();
+            } else {
+              res.send(lists);
+            };
+          });
+        };
+      });
+    } else {
+      res.status(400);
+      res.statusMessage = 'error when authenticating';
+      res.end();
+    };
+  }
 };

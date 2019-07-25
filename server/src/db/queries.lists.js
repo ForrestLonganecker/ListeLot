@@ -69,4 +69,24 @@ module.exports = {
       callback(err);
     });
   },
+  getAll(userId, callback){
+    List.findAll({where: {userId: userId}})
+    .then((lists) => {
+      let returnLists = lists.map((list) => {
+        // remove userId from list
+        let updatedItem = {
+          id: list.id,
+          title: list.title,
+          createdAt: list.createdAt,
+          updatedAt: list.updatedAt
+        };
+        return updatedItem;
+      });
+
+      callback(null, returnLists);
+    })
+    .catch((err) => {
+      callback(err);
+    });
+  },
 };
