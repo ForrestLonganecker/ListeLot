@@ -99,7 +99,7 @@ describe('routes: users', () => {
       });
     });
 
-    // END USER CREATE SPEC
+    // END USER CREATE TEST
   });
 
   describe('POST /users/login', () => {
@@ -121,7 +121,7 @@ describe('routes: users', () => {
       });
     });
 
-    // END USER LOGIN SPEC
+    // END USER LOGIN TEST
   });
 
   describe('GET /users/authenticate', () => {
@@ -159,7 +159,7 @@ describe('routes: users', () => {
       });
     });
 
-    // END USER AUTHENTICATED SPEC
+    // END USER AUTHENTICATED TEST
   });
 
 

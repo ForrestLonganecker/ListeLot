@@ -41,7 +41,6 @@ describe('User', () => {
         done();
       })
       .catch((err) => {
-        console.log(err);
         expect(err).toBeNull();
         done();
       });
@@ -56,13 +55,12 @@ describe('User', () => {
         done();
       })
       .catch((err) => {
-        console.log(err);
         expect(err.msg).toContain('unique constraint violation');
         done();
       });
     });
     
-    // END CREATE USER SPEC
+    // END CREATE USER TEST
   });
   
   describe('#destroy()', () => {
@@ -86,7 +84,7 @@ describe('User', () => {
       });
     });
 
-    // END DESTROY USER SPEC
+    // END DESTROY USER TEST
   });
 
 // END OF USER UNIT SPEC
