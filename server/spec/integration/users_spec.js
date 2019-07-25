@@ -127,7 +127,7 @@ describe('routes: users', () => {
   describe('GET /users/authenticate', () => {
     it('should authenticate requests that contain the token in the authbearer header', (done) => {
       // set axios default header to contain the token
-      axios.defaults.headers.common = {'Authorization': `Bearer ${this.token}`}
+      axios.defaults.headers.common = {'Authorization': `Bearer ${this.token}`};
       axios.get(`${base}authenticate`)
       .then((res) => {
         let token = authHelpers.decode(res.data);

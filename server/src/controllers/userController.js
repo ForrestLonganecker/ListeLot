@@ -59,7 +59,7 @@ module.exports = {
         if(err){
           res.status(400);
           res.statusMessage = 'Not authenticated';
-          res.send(err);
+          res.end();
         } else {
           // if user exists in db create a new token and send it to the front
           let newToken = authHelpers.createToken(user.email);
@@ -69,7 +69,7 @@ module.exports = {
     } else {
       res.status(400);
       res.statusMessage = 'Not authenticated';
-      res.send();
+      res.end();
     };
   },
 };
