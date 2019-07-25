@@ -21,4 +21,25 @@ module.exports = {
       callback(err);
     });
   },
+  destroy(deletedInfo, callback){
+    List.findOne({where: {
+      userId: deletedInfo.userId,
+      id: deletedInfo.listId
+      }
+    })
+    .then((list) => {
+      if(list){
+        List.destroy({where: {id: list.id}})
+        .then((list) => {
+          callback(null, list);
+        })
+        .catch((err) => {
+          callback(err);
+        });
+      }
+    })
+    .catch((err) => {
+      callback(err);
+    });
+  },
 };

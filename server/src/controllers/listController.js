@@ -35,6 +35,37 @@ module.exports = {
       res.status(400);
       res.statusMessage = 'error while authenticating.';
       res.end();
-    }
+    };
+  },
+  delete(req, res){
+    let token = authHelpers.hasToken(req);
+    if(token){
+      userQueries.getUser(token.email, (err, user) => {
+        if(err){
+          res.status(400);
+          res.statusMessage = 'credentials do not match.';
+          res.end();
+        } else {
+          let deleteInfo = {
+            listId: req.body.listId,
+            userId: user.id
+          };
+
+          listQueries.destroy(deleteInfo, (err, deletedList) => {
+            if(err){
+              res.status(400);
+              res.statusMessage = 'error creating list.';
+              res.end();
+            } else {
+              res.sendStatus(200)
+            };
+          });
+        };
+      });
+    } else {
+      res.status(400);
+      res.statusMessage = 'error while authenticating.';
+      res.end();
+    };
   },
 };

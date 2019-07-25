@@ -137,7 +137,6 @@ describe('routes: users', () => {
         done();
       })
       .catch((err) => {
-        console.log(err.request);
         expect(err).toBeNull();
         done();
       });
