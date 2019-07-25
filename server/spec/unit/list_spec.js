@@ -92,6 +92,7 @@ describe('List', () => {
   });
 
   describe('#destroy()', () => {
+
     it('should destroy the list with associated list.id', (done) => {
       List.findOne({where: {userId: this.user.id}})
       .then((list) => {
@@ -118,7 +119,34 @@ describe('List', () => {
     });
 
     // END LIST DESTROY TEST
-  })
+  });
+
+  describe('#update()', () => {
+
+    it('should update the title of the list with associated userId', (done) =>{
+      List.update({
+        title: 'updated title'
+      }, {where: {id: this.list.id}})
+      .then(() => {
+        // update does not return useful data
+        List.findByPk(this.list.id)
+        .then((list) => {
+          expect(list.title).toBe('updated title');
+          done();
+        })
+        .catch((err) => {
+          expect(err).toBeNull();
+          done();
+        });
+      })
+      .catch((err) => {
+        expect(err).toBeNull();
+        done();
+      });
+    });
+
+    // END LIST UPDATE TEST
+  });
 
 // END OF LIST USER SPEC
 });
