@@ -91,5 +91,34 @@ describe('List', () => {
     // END LIST CREATE TEST
   });
 
+  describe('#destroy()', () => {
+    it('should destroy the list with associated list.id', (done) => {
+      List.findOne({where: {userId: this.user.id}})
+      .then((list) => {
+        expect(list.title).toBe('Test list');
+        List.destroy({where: {id: list.id}})
+        .then((res) => {
+          expect(res).toBe(1);
+          List.findOne({where: {userId: this.user.id}})
+          .then((deletedList) => {
+            expect(deletedList).toBeNull();
+            done();
+          })
+          .catch((err) => {
+            expect(err).toBeNull();
+          });
+        })
+        .catch((err) => {
+          expect(err).toBeNull();
+        });
+      })
+      .catch((err) => {
+        expect(err).toBeNull();
+      });
+    });
+
+    // END LIST DESTROY TEST
+  })
+
 // END OF LIST USER SPEC
 });
