@@ -7,6 +7,9 @@ const List = require('../../src/db/models').List;
 const User = require('../../src/db/models').User;
 const base = 'http://localhost:4000/lists/';
 
+
+
+
 describe('routes: lists', () => {
 
   beforeEach((done) => {
@@ -142,7 +145,6 @@ describe('routes: lists', () => {
             done();
           })
           .catch((err) => {
-            console.log(err);
             expect(err.request.res.statusMessage).toBe('error while authenticating.');
             done();
           });
@@ -157,9 +159,45 @@ describe('routes: lists', () => {
     });
 
     describe('POST /lists/update', () => {
-      
-      it('should update the specified list if the user owns it', (done) => {
 
+      it('should update the specified list if the user owns it', (done) => {
+        let updateInfo = {
+          updatedTitle: 'updated title',
+          listId: this.list.id
+        };
+
+        axios.defaults.headers.common = {'Authorization': `Bearer ${this.token}`};
+        axios.post(`${base}update`, updateInfo)
+        .then((res) => {
+          delete axios.defaults.headers.common['Authorization'];
+
+          // console.log(res);
+          expect(res.data.title).toBe('updated title');
+          expect(res.status).toBe(200);
+          done();
+        })
+        .catch((err) => {
+          // console.log(err);
+          expect(err).toBeNull();
+          done();
+        });
+      });
+
+      fit('should not update the specified list if not authorized', (done) => {
+        let updateInfo = {
+          updatedTitle: 'updated title',
+          listId: this.list.id
+        };
+
+        axios.post(`${base}update`, updateInfo)
+        .then(() => {
+          // expect errors
+          done();
+        })
+        .catch((err) => {
+          expect(err.request.res.statusMessage).toBe('error when authenticating');
+          done();
+        });
       });
 
       // END UPDATE LIST TEST

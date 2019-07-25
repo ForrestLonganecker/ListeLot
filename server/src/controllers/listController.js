@@ -68,4 +68,37 @@ module.exports = {
       res.end();
     };
   },
+  update(req, res){
+    let token = authHelpers.hasToken(req);
+
+    if(token){
+      userQueries.getUser(token.email, (err, user) => {
+        if(err){
+          res.status(400);
+          res.statusMessage = 'error when authenticating';
+          res.end();
+        } else {
+          let updateInfo = {
+            updatedTitle: req.body.updatedTitle,
+            listId: req.body.listId,
+            userId: user.id
+          };
+
+          listQueries.update(updateInfo, (err, updatedList) => {
+            if(err){
+              res.status(400);
+              res.statusMessage = 'error updating list'
+              res.end()
+            } else {
+              res.send(updatedList);
+            };
+          });
+        };
+      })
+    } else {
+      res.status(400);
+      res.statusMessage = 'error when authenticating';
+      res.end();
+    };
+  },
 };

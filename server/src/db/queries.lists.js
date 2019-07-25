@@ -30,13 +30,40 @@ module.exports = {
     .then((list) => {
       if(list){
         List.destroy({where: {id: list.id}})
-        .then((list) => {
-          callback(null, list);
+        .then((deletedList) => {
+          callback(null, deletedList);
         })
         .catch((err) => {
           callback(err);
         });
       }
+    })
+    .catch((err) => {
+      callback(err);
+    });
+  },
+  update(updateInfo, callback){
+    List.update({
+      title: updateInfo.updatedTitle
+    }, {where: {
+      id: updateInfo.listId,
+      userId: updateInfo.userId
+    }})
+    .then(() => {
+      List.findByPk(updateInfo.listId)
+      .then((updatedList) => {
+        let resultList = {
+          title: updatedList.title,
+          id: updatedList.id,
+          createdAt: updatedList.createdAt,
+          updatedAt: updatedList.updatedAt
+        };
+
+        callback(null, resultList);
+      })
+      .catch((err) => {
+        callback(err);
+      })
     })
     .catch((err) => {
       callback(err);
