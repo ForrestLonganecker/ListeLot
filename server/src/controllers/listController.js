@@ -127,5 +127,5 @@ module.exports = {
       res.statusMessage = 'error when authenticating';
       res.end();
     };
-  }
+  },
 };
