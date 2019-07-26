@@ -7,19 +7,20 @@ import ListCreator from '../ListCreator/ListCreator';
 
 const Lists = ({ lists }) => {
 
-  // const displayLists = (inputLists) => {
-  //   const returnList = inputLists.map((list) => {
-  //     return(
-  //       <ListsItem list={list}/>
-  //     );
-  //   });
+  const displayLists = (inputLists) => {
+    const returnList = inputLists.map((list) => {
+      return(
+        <ListsItem list={list}/>
+      );
+    });
 
-  //   return returnList;
-  // }
+    return returnList;
+  }
 
   return(
     <div className="list-container">
       <ListCreator />
+      {displayLists(lists)}
     </div>
   );
 };
