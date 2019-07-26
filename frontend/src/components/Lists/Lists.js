@@ -18,9 +18,11 @@ const Lists = ({ lists }) => {
   }
 
   return(
-    <div className="list-container">
+    <div className="lists-wrapper">
       <ListCreator />
-      {displayLists(lists)}
+      <div className="lists-container">
+        {displayLists(lists)}
+      </div>
     </div>
   );
 };

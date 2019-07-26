@@ -31,6 +31,34 @@ const initLists = [
     title: 'list about 6',
     id: 6
   },
+  {
+    title: 'list about 6',
+    id: 6
+  },
+  {
+    title: 'list about 6',
+    id: 6
+  },
+  {
+    title: 'list about 6',
+    id: 6
+  },
+  {
+    title: 'list about 6',
+    id: 6
+  },
+  {
+    title: 'list about 6',
+    id: 6
+  },
+  {
+    title: 'list about 6',
+    id: 6
+  },
+  {
+    title: 'list about 6',
+    id: 6
+  },
 ]
 
 const Authenticated = ({ setIsAuthenticated }) => {

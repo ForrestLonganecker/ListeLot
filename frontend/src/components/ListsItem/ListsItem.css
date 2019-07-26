@@ -1,4 +1,37 @@
 .lists-item-container{
-  overflow-y: scroll;
-  height: 100%;
+  background-color: #aaffaa;
+  margin: 10px;
+  padding: 5px 0 5px 0;
+}
+
+.lists-button-container{
+  display: flex;
+  justify-content: space-around;
+}
+
+.delete-lists-item-button{
+  height: 30px;
+  width: 70px;
+  background-color: #AA0000;
+  color: #FFFFFF;
+  border-radius: 3px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.lists-item-button{
+  height: 30px;
+  width: 70px;
+  background-color: #7700ee;
+  color: #FFFFFF;
+  border-radius: 3px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.lists-item-title{
+  color: #002200;
+  font-size: 16px;
+  font-weight: bold;
+
 }

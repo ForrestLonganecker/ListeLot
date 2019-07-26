@@ -1,7 +1,7 @@
 .list-creator-form{
   display: flex;
   flex-direction: column;
-  height: 100px;
+  height: 150px;
   justify-content: space-evenly;
   align-items: center;
   width: 100%
@@ -10,3 +10,43 @@
 .list-creator-form > *{
   width: 80%;
 }
+
+.create-list-label{
+  font-size: 24px;
+}
+
+.create-list-input{
+  height: 30px;
+  width: 80%;
+  font-size: 16px;
+  background-color: #005511;
+  color: #EEFFDD;
+  padding-left: 5px;
+}
+
+.create-list-input::placeholder{
+  font-size: 16px;
+  background-color: #005511;
+  color: #EEFFDD;
+  padding-left: 5px;
+}
+
+.create-list-input:-webkit-autofill,
+.create-list-input:-webkit-autofill:hover, 
+.create-list-input:-webkit-autofill:focus{
+  -webkit-text-fill-color: #EEFFDD;
+  -webkit-box-shadow: 0 0 0px 1000px #005511 inset;
+  box-shadow: 0 0 0px 1000px #005511 inset;
+  padding-left: 5px;
+}
+
+.create-list-button{
+  height: 30px;
+  width: 80%;
+  background-color: #7700ee;
+  color: #FFFFFF;
+  border-radius: 3px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
