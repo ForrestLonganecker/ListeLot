@@ -105,11 +105,60 @@ describe('routes: listItems', () => {
     // END CREATE LIST ITEM SPEC
   });
 
-  // describe('POST /listItems/delete', () => {
+  describe('POST /listItems/delete', () => {
 
+    it('should delete the listItem with the specified id', (done) => {
+      let data = {
+        listItemId: this.listItem.id
+      };
 
-  //   // END DELETE LIST ITEM SPEC
-  // });
+      addToken(this.token);
+      axios.post(`${base}delete`, data)
+      .then((res) => {
+        removeToken();
+        expect(res.status).toBe(200);
+        ListItem.findByPk(this.listItem.id)
+        .then((list) => {
+          expect(list).toBeNull();
+          done();
+        })
+        .catch((err) => {
+          expect(err).toBeNull();
+          done();
+        });
+      })
+      .catch((err) => {
+        expect(err).toBeNull();
+        done();
+      });
+    });
+
+    it('should not delete the listItem when not authenticated', (done) => {
+      let data = {
+        listItemId: this.listItem.id
+      };
+
+      axios.post(`${base}delete`, data)
+      .then(() => {
+        ListItem.findByPk(this.listItem.id)
+        .then((listItem) => {
+          // list item should not be deleted
+          expect(listItem.text).toBe('list item test text');
+          done();
+        })
+        .catch((err) => {
+          expect(err.request.res.statusMessage).toBe('error while authenticating');
+          done();
+        });
+      })
+      .catch((err) => {
+        expect(err.request.res.statusMessage).toBe('error while authenticating');
+        done();
+      });
+    });
+
+    // END DELETE LIST ITEM SPEC
+  });
 
   // END LIST ITEMS INTEGRATION SPEC
 });
