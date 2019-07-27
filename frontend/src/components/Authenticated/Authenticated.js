@@ -18,15 +18,17 @@ if(process.env.NODE_ENV === 'development'){
 const Authenticated = ({ isAuthenticated, setIsAuthenticated }) => {
 
   const [lists, setLists] = useState();
+  const [display, setDisplay] = useState('Lists');
 
+  
   useEffect(() => {
     axios.get(getListsUrl)
     .then((res) => {
-      setLists(res.data);
+      setLists(res.data.reverse());
     })
     .catch((err) => {
     });
-  });
+  }, [display]);
 
   return(
     <div className="authenticated-container">

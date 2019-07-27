@@ -42,6 +42,7 @@ module.exports = {
     if(token){
       userQueries.getUser(token.email, (err, user) => {
         if(err){
+          console.log('1111111111111', err);
           res.status(400);
           res.statusMessage = 'credentials do not match.';
           res.end();
@@ -53,6 +54,7 @@ module.exports = {
 
           listQueries.destroy(deleteInfo, (err, deletedList) => {
             if(err){
+              console.log('222222222222222222', err);
               res.status(400);
               res.statusMessage = 'error creating list.';
               res.end();

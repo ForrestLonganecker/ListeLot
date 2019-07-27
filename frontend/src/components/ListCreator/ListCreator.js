@@ -19,8 +19,8 @@ const ListCreator = () => {
   const handleCreateList = (e) => {
     e.preventDefault();
 
-    if(title.length > 25){
-      alert(`Title is too long: ${title.length}. reduce to 25 characters`);
+    if(title.length > 25 || title.length < 1){
+      alert(`Adjust title length: ${title.length}. Must be 1-25 characters`);
     } else {
       let data = {
         title: title
@@ -28,7 +28,8 @@ const ListCreator = () => {
 
       axios.post(createListUrl, data)
       .then((res) => {
-        
+        // pass up the addition
+        setTitle('')
       })
       .catch((err) => {
         alert('something went wrong');
@@ -39,7 +40,7 @@ const ListCreator = () => {
   return(
     <form onSubmit={handleCreateList} className="list-creator-form">
       <label className="create-list-label">Create new list</label>
-      <input className="create-list-input" type="text" placeholder="25 characters max" onChange={(e) => setTitle(e.target.value)} />
+      <input className="create-list-input" type="text" placeholder="25 characters max" value={title} onChange={(e) => setTitle(e.target.value)} />
       <button className="create-list-button" type="submit">Submit</button>
     </form>
   );

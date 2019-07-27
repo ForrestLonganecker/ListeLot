@@ -12,7 +12,7 @@ const Lists = ({ lists }) => {
     if(lists){
       const returnList = inputLists.map((list) => {
         return(
-          <ListsItem list={list}/>
+          <ListsItem key={list.id} list={list}/>
         );
       });
   
