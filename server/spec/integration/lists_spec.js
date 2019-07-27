@@ -173,6 +173,7 @@ describe('routes: lists', () => {
           delete axios.defaults.headers.common['Authorization'];
 
           // console.log(res);
+          console.log(res.data);
           expect(res.data.title).toBe('updated title');
           expect(res.status).toBe(200);
           done();
