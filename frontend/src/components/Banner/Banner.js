@@ -1,10 +1,12 @@
 import React from 'react';
+import axios from 'axios';
 
 import './Banner.css';
 
 const Banner = ({ setIsAuthenticated }) => {
 
   const handleLogOut = () => {
+    delete axios.defaults.headers.common['Authorization'];
     setIsAuthenticated(false);
     localStorage.removeItem('token');
     alert('See you next time!');

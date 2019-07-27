@@ -33,10 +33,10 @@ const SignUp = ({ setActiveView, setIsAuthenticated }) => {
         const res = await axios.post(signUpUrl, data); 
           if(res.status === 200){
             setIsAuthenticated(true);
+            axios.defaults.headers.common = {'Authorization': `Bearer ${res.data}`};
             localStorage.setItem('token', res.data);
             alert('Thanks for signing up!');
           } else {
-            console.log(res)
             alert(`Status code: ${res.status}\nerror message: ${res.statusText}`);
           }
       } catch(err) {

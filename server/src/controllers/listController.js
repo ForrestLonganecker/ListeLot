@@ -8,6 +8,7 @@ module.exports = {
     if(token){
       userQueries.getUser(token.email, (err, user) => {
         if(err){
+          console.log('1111111111111111111111111111', err);
           res.status(400);
           res.statusMessage = 'Credentials do not match';
           res.send(err);
@@ -20,6 +21,7 @@ module.exports = {
 
           listQueries.createList(newList, (err, list) => {
             if(err){
+              console.log('2222222222222222222222', err);
               res.status(400);
               res.statusMessage = 'error while creating list.';
               res.end();
@@ -32,6 +34,7 @@ module.exports = {
         };
       });
     } else {
+      console.log('NO TOKEN')
       res.status(400);
       res.statusMessage = 'error while authenticating.';
       res.end();

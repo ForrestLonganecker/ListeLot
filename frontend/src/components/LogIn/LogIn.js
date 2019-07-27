@@ -28,6 +28,7 @@ const LogIn = ({ setActiveView, setIsAuthenticated }) => {
     try {
       const res = await axios.post(logInUrl, data);
       if(res.status === 200){
+        axios.defaults.headers.common = {'Authorization': `Bearer ${res.data}`};
         localStorage.setItem('token', res.data);
         setIsAuthenticated(true);
         alert('Welcome back!');
