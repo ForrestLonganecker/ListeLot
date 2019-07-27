@@ -13,7 +13,7 @@ const Authenticator = () => {
       case false:
         return <NotAuthenticated setIsAuthenticated={setIsAuthenticated} />;
       case true:
-        return <Authenticated setIsAuthenticated={setIsAuthenticated} />;
+        return <Authenticated isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />;
       default:
         return <NotAuthenticated setIsAuthenticated={setIsAuthenticated} />;
     }

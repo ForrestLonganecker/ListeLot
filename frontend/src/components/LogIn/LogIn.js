@@ -33,7 +33,7 @@ const LogIn = ({ setActiveView, setIsAuthenticated }) => {
         setIsAuthenticated(true);
         alert('Welcome back!');
       } else {
-        alert('Error when logging in: ' + res.statusText)
+        alert('Error when logging in: ' + res.statusText);
       };
     } catch(err) {
       alert('error while sending request:\n' + err.message);

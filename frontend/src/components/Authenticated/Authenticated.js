@@ -1,69 +1,32 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 import './Authenticated.css';
 
 import Banner from '../Banner/Banner';
 import Lists from '../Lists/Lists';
 
-const initLists = [
-  {
-    title: 'list 1',
-    id: 1
-  },
-  {
-    title: '2',
-    id: 2
-  },
-  {
-    title: 'list 3000000000000000000000000000000000000000000',
-    id: 3
-  },
-  {
-    title: 'list 4',
-    id: 4
-  },
-  {
-    title: 'list someoensiogndogsneg 5 ',
-    id: 5
-  },
-  {
-    title: 'list about 6',
-    id: 6
-  },
-  {
-    title: 'list about 6',
-    id: 6
-  },
-  {
-    title: 'list about 6',
-    id: 6
-  },
-  {
-    title: 'list about 6',
-    id: 6
-  },
-  {
-    title: 'list about 6',
-    id: 6
-  },
-  {
-    title: 'list about 6',
-    id: 6
-  },
-  {
-    title: 'list about 6',
-    id: 6
-  },
-  {
-    title: 'list about 6',
-    id: 6
-  },
-]
+let getListsUrl;
+if(process.env.NODE_ENV === 'production'){
+  getListsUrl = 'https://listelot.herokuapp.com/lists/getAll'
+};
+if(process.env.NODE_ENV === 'development'){
+  getListsUrl = 'http://localhost:4000/lists/getAll'; 
+};
 
-const Authenticated = ({ setIsAuthenticated }) => {
+const Authenticated = ({ isAuthenticated, setIsAuthenticated }) => {
 
-  const [lists, setLists] = useState(initLists);
+  const [lists, setLists] = useState();
+
+  useEffect(() => {
+    axios.get(getListsUrl)
+    .then((res) => {
+      setLists(res.data);
+    })
+    .catch((err) => {
+    });
+  });
 
   return(
     <div className="authenticated-container">

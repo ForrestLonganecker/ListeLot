@@ -8,14 +8,17 @@ import ListCreator from '../ListCreator/ListCreator';
 const Lists = ({ lists }) => {
 
   const displayLists = (inputLists) => {
-    const returnList = inputLists.map((list) => {
-      return(
-        <ListsItem list={list}/>
-      );
-    });
 
-    return returnList;
-  }
+    if(lists){
+      const returnList = inputLists.map((list) => {
+        return(
+          <ListsItem list={list}/>
+        );
+      });
+  
+      return returnList;  
+    };
+  };
 
   return(
     <div className="lists-wrapper">
