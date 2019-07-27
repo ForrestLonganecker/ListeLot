@@ -12,7 +12,7 @@ if(process.env.NODE_ENV === 'development'){
   createListUrl = 'http://localhost:4000/lists/create'; 
 }
 
-const ListCreator = () => {
+const ListCreator = ({ setLists }) => {
 
   const [title, setTitle] = useState('');
 
@@ -29,9 +29,11 @@ const ListCreator = () => {
       axios.post(createListUrl, data)
       .then((res) => {
         // pass up the addition
+        setLists(lists => [res.data, ...lists]);
         setTitle('')
       })
       .catch((err) => {
+        console.log(err);
         alert('something went wrong');
       });
     }

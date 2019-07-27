@@ -11,7 +11,7 @@ if(process.env.NODE_ENV === 'development'){
   deleteListUrl = 'http://localhost:4000/lists/delete'; 
 }
 
-const ListsItem = ({ list }) => {
+const ListsItem = ({ list, setDeletedList }) => {
 
   const handleDelete = (deleteId) => {
 
@@ -21,6 +21,7 @@ const ListsItem = ({ list }) => {
 
     axios.post(deleteListUrl, data)
     .then((res) => {
+      setDeletedList(deleteId);
       console.log(res);
     })
     .catch((err) => {
