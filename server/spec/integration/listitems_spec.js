@@ -8,6 +8,14 @@ const ListItem = require('../../src/db/models').ListItem;
 const User = require('../../src/db/models').User;
 const base = 'http://localhost:4000/listItems/';
 
+const addToken = (token) => {
+  axios.defaults.headers.common = {'Authorization': `Bearer ${token}`};
+};
+
+const removeToken = () => {
+  delete axios.defaults.headers.common['Authorization'];
+};
+
 describe('routes: listItems', () => {
 
   beforeEach((done) => {
@@ -75,8 +83,12 @@ describe('routes: listItems', () => {
         listId: this.list.id
       };
 
+      // add token to req
+      addToken(this.token);
+
       axios.post(`${base}create`, data)
       .then((res) => {
+        removeToken(this.token);
         expect(res.data.isComplete).toBeFalsy();
         expect(res.data.text).toBe('second list item');
         expect(res.data.id).toBe(2)
@@ -84,6 +96,7 @@ describe('routes: listItems', () => {
         done();
       })
       .catch((err) => {
+        console.log(err.message);
         expect(err).toBeNull();
         done();
       });
@@ -92,11 +105,11 @@ describe('routes: listItems', () => {
     // END CREATE LIST ITEM SPEC
   });
 
-  describe('POST /listItems/delete', () => {
+  // describe('POST /listItems/delete', () => {
 
 
-    // END DELETE LIST ITEM SPEC
-  });
+  //   // END DELETE LIST ITEM SPEC
+  // });
 
   // END LIST ITEMS INTEGRATION SPEC
 });

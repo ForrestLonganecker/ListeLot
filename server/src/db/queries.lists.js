@@ -89,4 +89,16 @@ module.exports = {
       callback(err);
     });
   },
+  getList(userId, listId, callback){
+    List.findOne({where: {
+      id: listId,
+      userId: userId
+    }})
+    .then((list) => {
+      callback(null, list);
+    })
+    .catch((err) => {
+      callback(err);
+    });
+  },
 };

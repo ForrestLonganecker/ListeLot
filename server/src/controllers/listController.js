@@ -4,7 +4,7 @@ const userQueries = require('../db/queries.users');
 
 module.exports = {
   create(req, res){
-    let token = authHelpers.hasToken(req)
+    let token = authHelpers.hasToken(req);
     if(token){
       userQueries.getUser(token.email, (err, user) => {
         if(err){
@@ -74,7 +74,6 @@ module.exports = {
     if(token){
       userQueries.getUser(token.email, (err, user) => {
         if(err){
-          console.log('1111111111111111111', err);
           res.status(400);
           res.statusMessage = 'error when authenticating';
           res.end();
@@ -87,7 +86,6 @@ module.exports = {
 
           listQueries.update(updateInfo, (err, updatedList) => {
             if(err){
-              console.log('222222222222222222222', err);
               res.status(400);
               res.statusMessage = 'error updating list'
               res.end()
@@ -98,7 +96,6 @@ module.exports = {
         };
       })
     } else {
-      console.log('333333333333333333333333');
       res.status(400);
       res.statusMessage = 'error when authenticating';
       res.end();
