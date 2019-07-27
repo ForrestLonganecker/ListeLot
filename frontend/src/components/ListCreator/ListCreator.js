@@ -33,7 +33,6 @@ const ListCreator = ({ setLists }) => {
         setTitle('')
       })
       .catch((err) => {
-        console.log(err);
         alert('something went wrong');
       });
     }

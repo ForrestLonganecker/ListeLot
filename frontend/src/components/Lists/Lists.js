@@ -19,6 +19,7 @@ const Lists = ({ activeList, setActiveList }) => {
 
   const [lists, setLists] = useState();
   const [deletedList, setDeletedList] = useState();
+  const [editingList, setEditingList] = useState();
 
   useEffect(() => {
     axios.get(getListsUrl)
@@ -32,10 +33,21 @@ const Lists = ({ activeList, setActiveList }) => {
   const displayLists = (inputLists) => {
     
     if(inputLists){
-      let updatedLists = inputLists
+      let updatedLists = inputLists;
+
       if(deletedList){
         updatedLists = inputLists.filter(list => {
           if(list.id !== deletedList){
+            return list;
+          };
+        });
+      };
+
+      if(editingList){
+        updatedLists = inputLists.map(list => {
+          if(list.id === editingList.id){
+            return editingList;
+          } else {
             return list;
           };
         });
@@ -44,7 +56,7 @@ const Lists = ({ activeList, setActiveList }) => {
       // create the return item out of the updatedList array
       let returnLists = updatedLists.map((list) => {
         return(
-          <ListsItem key={list.id} list={list} setDeletedList={setDeletedList} />
+          <ListsItem key={list.id} list={list} setDeletedList={setDeletedList} setEditingList={setEditingList} />
         );
       });
 
