@@ -23,22 +23,22 @@ const CurrentList = ({ activeList, setActiveList }) => {
 
 
   useEffect(() => {
-    if(currentList){
-      let data = {
-        listId: activeList.id
-      };
 
-      axios.post(activeListUrl, data)
-      .then((res) => {
-        console.log(res.data);
-        let returnList = res.data.reverse();
-        setCurrentItems(returnList);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-    }
-  }, [currentList]);
+    const interval = setInterval(() => {
+        let data = {
+          listId: activeList.id
+        };
+  
+        axios.post(activeListUrl, data)
+        .then((res) => {
+          let returnList = res.data.reverse();
+          setCurrentItems(returnList);
+        })
+        .catch((err) => {
+        });
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   const displayList = (inputList) => {
 
