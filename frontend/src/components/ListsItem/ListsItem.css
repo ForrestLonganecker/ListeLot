@@ -1,5 +1,5 @@
 .lists-item-container{
-  background-color: #aaffaa;
+  background-color: #d9aaff;
   margin: 10px;
   padding: 5px 0 5px 0;
 }
@@ -46,14 +46,14 @@
   height: 30px;
   width: 60%;
   font-size: 16px;
-  background-color: #005511;
+  background-color: #4c017e;
   color: #EEFFDD;
   padding-left: 5px;
 }
 
 .edit-list-title-input::placeholder{
   font-size: 16px;
-  background-color: #005511;
+  background-color: #4c017e;
   color: #EEFFDD;
   padding-left: 5px;
 }
@@ -62,8 +62,8 @@
 .edit-list-title-input:-webkit-autofill:hover, 
 .edit-list-title-input:-webkit-autofill:focus{
   -webkit-text-fill-color: #EEFFDD;
-  -webkit-box-shadow: 0 0 0px 1000px #005511 inset;
-  box-shadow: 0 0 0px 1000px #005511 inset;
+  -webkit-box-shadow: 0 0 0px 1000px #4c017e inset;
+  box-shadow: 0 0 0px 1000px #4c017e inset;
   padding-left: 5px;
 }
 

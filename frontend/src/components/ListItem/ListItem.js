@@ -115,7 +115,7 @@ const ListItem = ({ currentItem, setCurrentItems, currentItems }) => {
           <div className="lists-button-container">
             <button className="delete-lists-item-button" type="button" onClick={() => handleDelete()} >delete</button>
             <button className="lists-item-button" type="button" onClick={() => setCurrentlyEditing(!currentlyEditing)}>edit</button>
-            <button className="lists-item-button" type="button" onClick={() => toggleComplete()} >{currentItem.isComplete ? "Completed!" : "unfinished"}</button>
+            <button className="complete-button" type="button" onClick={() => toggleComplete()} >{currentItem.isComplete ? "Completed!" : "unfinished"}</button>
           </div>
           <form className="editing-list-form" onSubmit={handleEdit}>
             <input className="edit-list-title-input" type="text" defaultValue={currentItem.text} onChange={(e) => setEditText(e.target.value)} />
@@ -130,7 +130,7 @@ const ListItem = ({ currentItem, setCurrentItems, currentItems }) => {
           <div className="lists-button-container">
             <button className="delete-lists-item-button" type="button" onClick={() => handleDelete()} >delete</button>
             <button className="lists-item-button" type="button" onClick={() => setCurrentlyEditing(!currentlyEditing)}>edit</button>
-            <button className="lists-item-button" type="button" onClick={() => toggleComplete()} >{currentItem.isComplete ? "Completed!" : "unfinished"}</button>
+            <button className={currentItem.isComplete ? "complete-button" : "unfinished-button"} type="button" onClick={() => toggleComplete()} >{currentItem.isComplete ? "Completed!" : "unfinished"}</button>
           </div>
         </div>
       );

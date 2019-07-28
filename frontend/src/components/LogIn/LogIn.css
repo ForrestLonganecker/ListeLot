@@ -14,14 +14,14 @@
   width: 200px;
   margin-top: 30px;
   font-size: 16px;
-  background-color: #005511;
+  background-color: #4c017e;
   color: #EEFFDD;
   padding-left: 5px;
 }
 
 .log-in-input::placeholder{
   font-size: 16px;
-  background-color: #005511;
+  background-color: #4c017e;
   color: #EEFFDD;
   padding-left: 5px;
 }
@@ -30,8 +30,8 @@
 .log-in-input:-webkit-autofill:hover, 
 .log-in-input:-webkit-autofill:focus{
   -webkit-text-fill-color: #EEFFDD;
-  -webkit-box-shadow: 0 0 0px 1000px #005511 inset;
-  box-shadow: 0 0 0px 1000px #005511 inset;
+  -webkit-box-shadow: 0 0 0px 1000px #4c017e inset;
+  box-shadow: 0 0 0px 1000px #4c017e inset;
   padding-left: 5px;
 }
 
@@ -53,7 +53,7 @@
 .secondary-button{
   height: 30px;
   width: 90px;
-  background-color: #005511;
+  background-color: #4c017e;
   color: #EEFFDD;
   border-radius: 3px;
   font-size: 18px;
