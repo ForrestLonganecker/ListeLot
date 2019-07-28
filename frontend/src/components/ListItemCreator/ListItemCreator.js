@@ -12,7 +12,7 @@ if(process.env.NODE_ENV === 'development'){
   createItemUrl = 'http://localhost:4000/listItems/create'; 
 }
 
-const ListItemCreator = ({ listTitle, listId }) => {
+const ListItemCreator = ({ listTitle, listId, setCurrentItems }) => {
 
   const [text, setText] = useState('');
 
@@ -29,6 +29,8 @@ const ListItemCreator = ({ listTitle, listId }) => {
 
       axios.post(createItemUrl, data)
       .then((res) => {
+
+        setCurrentItems(items => [res.data, ...items])
         console.log(res.data);
       })
       .catch((err) => {

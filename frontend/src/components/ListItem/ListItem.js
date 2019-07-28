@@ -10,7 +10,7 @@ const ListItem = ({ listId, text, isComplete }) => {
       <div className="lists-button-container">
         <button className="delete-lists-item-button" type="button" >delete</button>
         <button className="lists-item-button" type="button" >edit</button>
-        <button className="lists-item-button" type="button" >select</button>
+        <button className="lists-item-button" type="button" >{isComplete ? "Completed!" : "unfinished"}</button>
       </div>
     </div>
   );

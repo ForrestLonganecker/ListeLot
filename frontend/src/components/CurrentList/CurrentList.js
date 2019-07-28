@@ -57,7 +57,7 @@ const CurrentList = ({ activeList, setActiveList }) => {
   return(
     <div className="current-list-wrapper">
     <button className="close-list-button" type="button" onClick={() => {setActiveList()}}>X</button>
-      <ListItemCreator listTitle={currentList.title} listId={currentList.id} />
+      <ListItemCreator listTitle={currentList.title} listId={currentList.id} setCurrentItems={setCurrentItems} />
       <div className="current-list-container">
         {displayList(currentItems)}
       </div>
