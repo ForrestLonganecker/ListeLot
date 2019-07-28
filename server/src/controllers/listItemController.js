@@ -86,4 +86,49 @@ module.exports = {
       res.end();
     };
   },
+  update(req, res){
+    let token = authHelpers.hasToken(req);
+    if(token){
+
+
+      // check for a user with associated email
+      userQueries.getUser(token.email, (err, user) => {
+        if(err){
+          res.status(400);
+          res.statusMessage = 'error while authenticating';
+          res.end();
+        } else {
+
+          // locate the list associated with the user
+          listQueries.getList(user.id, req.body.listId, (err, list) => {
+            if(err){
+              res.status(400);
+              res.statusMessage = 'Error locating list';
+              res.end();
+            } else {
+              let updateInfo = {
+                listItemId: req.body.listItemId,
+                listId: list.id,
+                text: req.body.updatedText
+              }
+
+              listItemQueries.updateText(updateInfo, (err, updatedListItem) => {
+                if(err){
+                  res.status(400);
+                  res.statusMessage = 'Error updating list item';;
+                  res.end();
+                } else {
+                  res.send(updatedListItem)
+                };
+              });
+            };
+          });
+        };
+      });
+    } else {
+      res.status(400);
+      res.statusMessage = 'error while authenticating';
+      res.end();
+    };
+  },
 };

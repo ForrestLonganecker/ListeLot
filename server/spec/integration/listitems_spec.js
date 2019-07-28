@@ -175,7 +175,7 @@ describe('routes: listItems', () => {
       axios.post(`${base}update`, data)
       .then((res) => {
         removeToken();
-        expect(res.data.text).toBe('updated title');
+        expect(res.data.text).toBe('updated text');
         expect(res.status).toBe(200);
         done();
       })
@@ -199,7 +199,7 @@ describe('routes: listItems', () => {
         done();
       })
       .catch((err) => {
-        expect(err.request.res.statusmessage).toBe('error when authenticating');
+        expect(err.request.res.statusMessage).toBe('error while authenticating');
         done();
       });
     });

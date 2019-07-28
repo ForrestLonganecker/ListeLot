@@ -24,4 +24,25 @@ module.exports = {
       callback(err);
     });
   },
+  updateText(updateInfo, callback){
+    ListItem.update({
+      text: updateInfo.text
+    }, {where: {
+      id: updateInfo.listItemId,
+      listId: updateInfo.listId
+    }})
+    .then(() => {
+      ListItem.findByPk(updateInfo.listItemId)
+      .then((updatedListItem) => {
+        let returnItem = updatedListItem,dataValues;
+        callback(null, returnItem);
+      })
+      .catch((err) => {
+        callback(err);
+      });
+    })
+    .catch((err) => {
+      callback(err);
+    });
+  },
 };
