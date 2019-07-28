@@ -71,7 +71,7 @@ const ListsItem = ({ list, lists, setLists, selectList }) => {
 
   const handleDisplay = (editingState) => {
 
-    if(editingState === true){
+    if(editingState){
       return(
         <div className="lists-item-container">
           <p className="lists-item-title">{list.title}</p>
