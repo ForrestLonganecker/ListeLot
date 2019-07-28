@@ -172,13 +172,11 @@ describe('routes: lists', () => {
         .then((res) => {
           delete axios.defaults.headers.common['Authorization'];
 
-          // console.log(res);
           expect(res.data.title).toBe('updated title');
           expect(res.status).toBe(200);
           done();
         })
         .catch((err) => {
-          // console.log(err);
           expect(err).toBeNull();
           done();
         });

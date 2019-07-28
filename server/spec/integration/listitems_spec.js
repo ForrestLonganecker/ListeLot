@@ -162,5 +162,50 @@ describe('routes: listItems', () => {
     // END DELETE LIST ITEM SPEC
   });
 
+  describe('POST /listItems/update', () => {
+
+    it('should update the text of the specified listItem', (done) => {
+      let data = {
+        updatedText: 'updated text',
+        listItemId: this.listItem.id,
+        listId: this.listItem.id
+      };
+
+      addToken(this.token);
+      axios.post(`${base}update`, data)
+      .then((res) => {
+        removeToken();
+        expect(res.data.text).toBe('updated title');
+        expect(res.status).toBe(200);
+        done();
+      })
+      .catch((err) => {
+        expect(err).toBeNull();
+        done();
+      });
+    });
+
+    it('should not update the specified listItem if not authenticated', (done) => {
+      let data = {
+        updatedText: 'updated text',
+        listItemId: this.listItem.id,
+        listId: this.listItem.id
+      };
+
+      axios.post(`${base}update`, data)
+      .then((res) => {
+        // expect errors
+        expect(res).toBeNull();
+        done();
+      })
+      .catch((err) => {
+        expect(err.request.res.statusmessage).toBe('error when authenticating');
+        done();
+      });
+    });
+
+    // END UPDATE LIST ITEMS TEST
+  });
+
   // END LIST ITEMS INTEGRATION SPEC
 });
