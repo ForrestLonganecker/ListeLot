@@ -19,7 +19,8 @@ Users should be able to log in and view lists that they have created previously.
 
 (Hosted on Heroku)
 
-I built this app with an Express.js backend, using postgress to store user data and list information. At this point Users lists are private, but the way things are set up leaves the option to easily add in additional functionality, such as adding collaborators so multiple different Users can view the same lists.  
+I built this app with an Express.js backend, using postgress to store user data and list information. At this point Users lists are private, but the way things are set up leaves the option to easily add in additional functionality, such as adding collaborators so multiple different Users can view the same lists.
+
 ---
 
 ### Authorization:
