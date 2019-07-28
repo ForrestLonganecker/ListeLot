@@ -67,7 +67,6 @@ describe('routes: lists', () => {
         axios.defaults.headers.common = {'Authorization': `Bearer ${this.token}`};
         axios.post(`${base}create`, data)
         .then((res) => {
-          // console.log(res);
           expect(res.data.title).toBe('second list');
           // remove the default headers token
           delete axios.defaults.headers.common['Authorization'];

@@ -48,7 +48,7 @@ const SignUp = ({ setActiveView, setIsAuthenticated }) => {
 
   return(
     <div className="sign-up-container">
-      <h1>Sign up!</h1>
+      <h2>Sign up!</h2>
       <form className="sign-up-form" onSubmit={handleSignUp}>
         <input className="sign-up-input" type="text" placeholder="Enter email address" onChange={(e) => setEmail(e.target.value)} />
         <input className="sign-up-input" type="password" placeholder="Enter password" onChange={(e) => setPassword(e.target.value)} />

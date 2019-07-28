@@ -42,7 +42,7 @@ const LogIn = ({ setActiveView, setIsAuthenticated }) => {
 
   return(
     <div className="log-in-container">
-      <h1>Log in!</h1>
+      <h2>Log in!</h2>
       <form className="log-in-form" onSubmit={handleLogIn}>
         <input className="log-in-input" type="text" placeholder="Enter email address" onChange={(e) => setEmail(e.target.value)} />
         <input className="log-in-input" type="password" placeholder="Enter password" onChange={(e) => setPassword(e.target.value)} />

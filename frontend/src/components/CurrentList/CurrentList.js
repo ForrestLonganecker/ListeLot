@@ -17,8 +17,6 @@ if(process.env.NODE_ENV === 'development'){
 
 const CurrentList = ({ activeList, setActiveList }) => {
 
-  // modify this list to keep state current
-  const [currentList, setCurrentList] = useState(activeList);
   const [currentItems, setCurrentItems] = useState();
 
 
@@ -31,18 +29,18 @@ const CurrentList = ({ activeList, setActiveList }) => {
   
         axios.post(activeListUrl, data)
         .then((res) => {
-          let returnList = res.data.reverse();
-          setCurrentItems(returnList);
+          setCurrentItems(res.data.reverse());
         })
         .catch((err) => {
         });
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [activeList.id]);
 
   const displayList = (inputList) => {
 
 
+    
     if(inputList){
       let returnList = inputList.map((item) => {
         return(
@@ -57,7 +55,7 @@ const CurrentList = ({ activeList, setActiveList }) => {
   return(
     <div className="current-list-wrapper">
     <button className="close-list-button" type="button" onClick={() => {setActiveList()}}>X</button>
-      <ListItemCreator listTitle={currentList.title} listId={currentList.id} setCurrentItems={setCurrentItems} />
+      <ListItemCreator listTitle={activeList.title} listId={activeList.id} setCurrentItems={setCurrentItems} />
       <div className="current-list-container">
         {displayList(currentItems)}
       </div>

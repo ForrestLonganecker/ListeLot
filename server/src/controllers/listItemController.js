@@ -13,7 +13,7 @@ module.exports = {
         if(err){
           res.status(400);
           res.statusMessage = 'error while authenticating';
-          res.send(err);
+          res.end();
         } else {
 
           // check for list with associated userid && listid
@@ -21,7 +21,7 @@ module.exports = {
             if(err){
               res.status(400);
               res.statusMessage = 'Could not find a matching list';
-              res.send(err);
+              res.end();
             } else {
               let newListItem = {
                 text: req.body.text,
@@ -32,7 +32,7 @@ module.exports = {
                 if(err){
                   res.status(400);
                   res.statusMessage = 'Error creating list item';
-                  res.send(err);
+                  res.end();
                 } else {
                   res.send(listItem);
                 };
@@ -182,7 +182,6 @@ module.exports = {
       userQueries.getUser(token.email, (err, user) => {
         if(err){
           res.status(400);
-          console.log('11111111111111111', err);
           res.statusMessage = 'error while authenticating';
           res.end();
         } else {
@@ -190,7 +189,6 @@ module.exports = {
           // locate the list associated with the user
           listQueries.getList(user.id, req.body.listId, (err, list) => {
             if(err){
-              console.log('2222222222222222', err);
               res.status(400);
               res.statusMessage = 'Error locating list';
               res.end();
@@ -198,7 +196,6 @@ module.exports = {
 
               listItemQueries.getAll(list.id, (err, listItems) => {
                 if(err){
-                  console.log('33333333333333333333', err);
                   res.status(400);
                   res.statusMessage = 'Error retrieving items';
                   res.end();
@@ -211,7 +208,6 @@ module.exports = {
         };
       });
     } else {
-      console.log('4444444444444444444444')
       res.status(400);
       res.statusMessage = 'error while authenticating';
       res.end();

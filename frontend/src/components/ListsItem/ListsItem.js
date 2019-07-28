@@ -31,7 +31,9 @@ const ListsItem = ({ list, lists, setLists, selectList }) => {
       let updatedLists = lists.filter((originalList) => {
         if(originalList.id !== list.id){
           return originalList;
-        };
+        } else {
+          return null;
+        }
       });
 
       setLists(updatedLists);

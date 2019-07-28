@@ -37,6 +37,8 @@ const ListItem = ({ currentItem, setCurrentItems, currentItems }) => {
       let updatedItems = currentItems.filter((item) => {
         if(item.id !== currentItem.id){
           return item
+        } else {
+          return null;
         };
       });
 

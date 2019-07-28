@@ -5,6 +5,7 @@ import './NotAuthenticated.css';
 
 import LogIn from '../LogIn/LogIn';
 import SignUp from '../SignUp/SignUp';
+import NotAuthenticatedBanner from '../NotAuthenticatedBanner/NotAuthenticatedBanner';
 
 const NotAuthenticated = ({ setIsAuthenticated }) => {
 
@@ -23,7 +24,10 @@ const NotAuthenticated = ({ setIsAuthenticated }) => {
   };
 
   return(
-      handleDisplay(activeView)
+      <div className="not-auth-container">
+        <NotAuthenticatedBanner />
+        {handleDisplay(activeView)}
+      </div>
   );
 };
 

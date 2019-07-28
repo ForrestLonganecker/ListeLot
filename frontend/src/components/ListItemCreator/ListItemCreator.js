@@ -30,6 +30,7 @@ const ListItemCreator = ({ listTitle, listId, setCurrentItems }) => {
       axios.post(createItemUrl, data)
       .then((res) => {
         setCurrentItems(items => [res.data, ...items])
+        setText('');
       })
       .catch((err) => {
         alert('something went wrong, please try again.');
@@ -40,7 +41,7 @@ const ListItemCreator = ({ listTitle, listId, setCurrentItems }) => {
   return(
     <form onSubmit={handleCreateItem} className="list-creator-form">
       <label className="create-list-label">{listTitle}</label>
-      <input className="create-list-input" type="text" placeholder="add a new item to your list" onChange={(e) => setText(e.target.value)} />
+      <input className="create-list-input" type="text" placeholder="add a new item to your list" value={text} onChange={(e) => setText(e.target.value)} />
       <button className="create-list-button" type="submit">Submit</button>
     </form>
   );

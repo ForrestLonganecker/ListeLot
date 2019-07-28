@@ -10,7 +10,7 @@ module.exports = {
         if(err){
           res.status(400);
           res.statusMessage = 'Credentials do not match';
-          res.send(err);
+          res.end();
         } else {
           let newList = {
             title: req.body.title,
