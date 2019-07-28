@@ -259,5 +259,56 @@ describe('routes: listItems', () => {
     // END COMPLETED LIST ITEMS TEST
   });
 
+  describe('POST /listItems/activeList', () => {
+
+    it('should return an array of list items for the selected list', (done) => {
+      let data = {
+        listId: this.listId
+      };
+
+      // add another item to the list
+      ListItem.create({
+        text: 'second test list item',
+        listId: this.list.id
+      })
+      .then(() => {
+        addToken(this.token);
+        axios.post(`${base}activeList`, data)
+        .then((res) => {
+          removeToken();
+          expect(res.data[0].text).toBe('list item test text');
+          expect(res.data[1].text).toBe('second test list item');
+          done();
+        })
+        .catch((err) => {
+          expect(err).toBeNull();
+          done();
+        });
+      })
+      .catch((err) => {
+        expect(err).toBeNull();
+        done();
+      });
+    });
+
+    it('should return an array of list items for the selected list', (done) => {
+      let data = {
+        listId: this.listId
+      };
+
+      axios.post(`${base}activeList`, data)
+      .then((res) => {
+        expect(res).toBeNull();
+        done();
+      })
+      .catch((err) => {
+        expect(err.request.res.statusMessage).toBe('error while authenticating');
+        done();
+      });
+    });
+
+    // END GET ACTIVE LIST TEST
+  });
+
   // END LIST ITEMS INTEGRATION SPEC
 });
