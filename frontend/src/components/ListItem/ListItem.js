@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import './ListItem.css';
 
+// set up routes
 let deleteItemUrl;
 let completedItemUrl;
 let updateItemUrl;
@@ -20,6 +21,7 @@ if(process.env.NODE_ENV === 'development'){
 
 const ListItem = ({ currentItem, setCurrentItems, currentItems }) => {
 
+  // set up state for toggling edit view state and edited text
   const [currentlyEditing, setCurrentlyEditing] = useState(false);
   const [editText, setEditText] = useState('');
 
@@ -32,6 +34,7 @@ const ListItem = ({ currentItem, setCurrentItems, currentItems }) => {
     
     axios.post(deleteItemUrl, data)
     .then((res) => {
+      // res is succes code 200
 
       // remove the deleted item from array
       let updatedItems = currentItems.filter((item) => {
@@ -42,6 +45,7 @@ const ListItem = ({ currentItem, setCurrentItems, currentItems }) => {
         };
       });
 
+      // set current items to the updated items array
       setCurrentItems(updatedItems)
     })
     .catch((err) => {
@@ -49,6 +53,7 @@ const ListItem = ({ currentItem, setCurrentItems, currentItems }) => {
     });
   };
 
+  // set item to complete, or unfinished based on starting state
   const toggleComplete = () => {
 
     let data = {
@@ -59,7 +64,8 @@ const ListItem = ({ currentItem, setCurrentItems, currentItems }) => {
 
     axios.post(completedItemUrl, data)
     .then((res) => {
-
+      // res is success code 200
+      
       let updatedItems = currentItems.map((item) => {
         if(item.id === currentItem.id){
           currentItem.isComplete = !currentItem.isComplete;
@@ -69,6 +75,7 @@ const ListItem = ({ currentItem, setCurrentItems, currentItems }) => {
         }
       })
 
+      // set current items to updated item array
       setCurrentItems(updatedItems);
     })
     .catch((err) => {
@@ -77,8 +84,10 @@ const ListItem = ({ currentItem, setCurrentItems, currentItems }) => {
   };
 
   const handleEdit = (e) => {
+    // prevent page refresh
     e.preventDefault();
 
+    // verify input length
     if(editText.length < 1 || editText.length > 25){
       alert(`Adjust title length: ${editText.length}. Must be 1-25 characters`);
     } else if(editText !== currentItem.text){
@@ -91,6 +100,7 @@ const ListItem = ({ currentItem, setCurrentItems, currentItems }) => {
 
       axios.post(updateItemUrl, data)
       .then((res) => {
+        // res.data = updated item
 
         let updatedItems = currentItems.map((item) => {
           if(item.id === currentItem.id){
@@ -105,11 +115,13 @@ const ListItem = ({ currentItem, setCurrentItems, currentItems }) => {
       .catch((err) => {
         alert('something went wrong, please try agian');
       })
-    }
+    };
   }
   
+  // handle display depending on editing state
   const handleDisplay = (editingState) => {
 
+    // display with edit input or without depending on state(currentlyEditing)
     if(editingState){
       return(
         <div className="lists-item-container">
@@ -140,6 +152,7 @@ const ListItem = ({ currentItem, setCurrentItems, currentItems }) => {
   }
 
   return(
+    // pass in currentlyEditing
     handleDisplay(currentlyEditing)
   );
 };

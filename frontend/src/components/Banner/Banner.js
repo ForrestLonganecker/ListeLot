@@ -6,6 +6,7 @@ import './Banner.css';
 const Banner = ({ setIsAuthenticated }) => {
 
   const handleLogOut = () => {
+    // remove the token from the request headers and localStorage as you log out
     delete axios.defaults.headers.common['Authorization'];
     setIsAuthenticated(false);
     localStorage.removeItem('token');

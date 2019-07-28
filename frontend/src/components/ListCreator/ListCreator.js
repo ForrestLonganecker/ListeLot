@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import './ListCreator.css';
 
+// set up routes
 let createListUrl;
 if(process.env.NODE_ENV === 'production'){
   createListUrl = 'https://listelot.herokuapp.com/lists/create'
@@ -14,22 +15,28 @@ if(process.env.NODE_ENV === 'development'){
 
 const ListCreator = ({ setLists }) => {
 
+  // title state for new List
   const [title, setTitle] = useState('');
 
   const handleCreateList = (e) => {
+    // prevent the form from refreshing the page
     e.preventDefault();
 
+    // check input length
     if(title.length > 25 || title.length < 1){
       alert(`Adjust title length: ${title.length}. Must be 1-25 characters`);
     } else {
+      // create request.body
       let data = {
         title: title
       };
 
+      // make request
       axios.post(createListUrl, data)
       .then((res) => {
-        // pass up the addition
+        // pass up the addition (res.data === newList)
         setLists(lists => [res.data, ...lists]);
+        // reset the title state to clear the field
         setTitle('')
       })
       .catch((err) => {

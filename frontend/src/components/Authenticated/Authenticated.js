@@ -1,6 +1,5 @@
 import React from 'react';
 import { useState } from 'react';
-// import axios from 'axios';
 
 import './Authenticated.css';
 
@@ -8,15 +7,9 @@ import Banner from '../Banner/Banner';
 import Lists from '../Lists/Lists';
 import CurrentList from '../CurrentList/CurrentList';
 
-// let getListsUrl;
-// if(process.env.NODE_ENV === 'production'){
-//   getListsUrl = 'https://listelot.herokuapp.com/lists/getAll'
-// };
-// if(process.env.NODE_ENV === 'development'){
-//   getListsUrl = 'http://localhost:4000/lists/getAll'; 
-// };
 
-const Authenticated = ({ isAuthenticated, setIsAuthenticated }) => {
+// when authenticated we display this component
+const Authenticated = ({ setIsAuthenticated }) => {
 
   const [activeList, setActiveList] = useState();
 

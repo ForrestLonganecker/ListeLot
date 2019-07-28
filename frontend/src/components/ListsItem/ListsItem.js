@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import './ListsItem.css';
 
+// set up routes
 let deleteListUrl;
 let editListUrl;
 if(process.env.NODE_ENV === 'production'){
@@ -15,8 +16,10 @@ if(process.env.NODE_ENV === 'development'){
   editListUrl = 'http://localhost:4000/lists/update'; 
 }
 
+// take in list, the ability to modify the list of lists and select active list
 const ListsItem = ({ list, lists, setLists, selectList }) => {
 
+  // currently editing state used for changing view, and edit title used for update
   const [currentlyEditing, setCurrentlyEditing] = useState(false);
   const [editTitle, setEditTitle] = useState('');
 
@@ -28,6 +31,9 @@ const ListsItem = ({ list, lists, setLists, selectList }) => {
 
     axios.post(deleteListUrl, data)
     .then((res) => {
+      // res = success code 200
+
+      // filter out deleted list
       let updatedLists = lists.filter((originalList) => {
         if(originalList.id !== list.id){
           return originalList;
@@ -36,6 +42,7 @@ const ListsItem = ({ list, lists, setLists, selectList }) => {
         }
       });
 
+      // set state for list of lists
       setLists(updatedLists);
     })
     .catch((err) => {
@@ -44,33 +51,44 @@ const ListsItem = ({ list, lists, setLists, selectList }) => {
   };
 
   const handleEdit = (e) => {
+    // prevent page refresh
     e.preventDefault();
 
-    if(editTitle && editTitle !== list.title){
-      let data = {
-        updatedTitle: editTitle,
-        listId: list.id
-      };
+    // check input length/ value
+    if(editTitle.length > 25 || editTitle.length < 1){
+      alert(`Adjust title length: ${editTitle.length}. Must be 1-25 characters`);
+    } else {
+      if(editTitle && editTitle !== list.title){
+        let data = {
+          updatedTitle: editTitle,
+          listId: list.id
+        };
+  
+        axios.post(editListUrl, data)
+        .then((res) => {
+          // res.data = updatedlist
 
-      axios.post(editListUrl, data)
-      .then((res) => {
-
-        let updatedLists = lists.map((originalList) => {
-          if(originalList.id === list.id){
-            return res.data;
-          } else {
-            return originalList;
-          };
+          // replace the list that has been updated
+          let updatedLists = lists.map((originalList) => {
+            if(originalList.id === list.id){
+              return res.data;
+            } else {
+              return originalList;
+            };
+          });
+  
+          // set the list of list state to updatedLists
+          setLists(updatedLists);
+        })
+        .catch((err) => {
+          alert('Could not update list, please try again.');
         });
-
-        setLists(updatedLists);
-      })
-      .catch((err) => {
-        alert('Could not update list, please try again.');
-      });
+      };
     };
   };
 
+
+  // pass in editingState to toggle edit input view
   const handleDisplay = (editingState) => {
 
     if(editingState){

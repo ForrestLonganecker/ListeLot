@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import './SignUp.css';
 
+// set up routes
 let signUpUrl;
 if(process.env.NODE_ENV === 'production'){
   signUpUrl = 'https://listelot.herokuapp.com/users/create'
@@ -14,13 +15,15 @@ if(process.env.NODE_ENV === 'development'){
 
 const SignUp = ({ setActiveView, setIsAuthenticated }) => {
   
+  // set up input field state
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
 
-  const handleSignUp = async (e) => {
+  const handleSignUp = (e) => {
     e.preventDefault();
 
+    // check if passwords match
     if(password !== passwordConfirmation){
       alert('Passwords does not match confirmation.');
     } else {
@@ -29,19 +32,19 @@ const SignUp = ({ setActiveView, setIsAuthenticated }) => {
         password: password.trim()
       };
 
-      try {
-        const res = await axios.post(signUpUrl, data); 
-          if(res.status === 200){
-            setIsAuthenticated(true);
-            axios.defaults.headers.common = {'Authorization': `Bearer ${res.data}`};
-            localStorage.setItem('token', res.data);
-            alert('Thanks for signing up!');
-          } else {
-            alert(`Status code: ${res.status}\nerror message: ${res.statusText}`);
-          }
-      } catch(err) {
-        alert('error while sending request:\n' + err.message);
-      };
+      // request signup
+      axios.post(signUpUrl, data)
+      .then((res) => {
+        // res.data = token
+        // set auth state add token to req.headers and set token in localStorage
+        setIsAuthenticated(true);
+        axios.defaults.headers.common = {'Authorization': `Bearer ${res.data}`};
+        localStorage.setItem('token', res.data);
+        alert('Thanks for signing up!');
+      }) 
+      .catch((err) => {
+        alert('something went wrong, please try again');
+      });
     };
   };
 

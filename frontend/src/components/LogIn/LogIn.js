@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import './LogIn.css';
 
+// set up routes
 let logInUrl;
 if(process.env.NODE_ENV === 'production'){
   logInUrl = 'https://listelot.herokuapp.com/users/logIn'
@@ -12,12 +13,16 @@ if(process.env.NODE_ENV === 'development'){
   logInUrl = 'http://localhost:4000/users/logIn'; 
 }
 
+// pass in setActiveView to toggle between signup/login
+// setIsAuthenticated to toggle view change
 const LogIn = ({ setActiveView, setIsAuthenticated }) => {
 
+  // set up input field state
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogIn = async (e) => {
+  const handleLogIn = (e) => {
+    // prevent page refresh
     e.preventDefault();
 
     let data = {
@@ -25,19 +30,18 @@ const LogIn = ({ setActiveView, setIsAuthenticated }) => {
       password: password.trim()
     };
 
-    try {
-      const res = await axios.post(logInUrl, data);
-      if(res.status === 200){
-        axios.defaults.headers.common = {'Authorization': `Bearer ${res.data}`};
-        localStorage.setItem('token', res.data);
-        setIsAuthenticated(true);
-        alert('Welcome back!');
-      } else {
-        alert('Error when logging in: ' + res.statusText);
-      };
-    } catch(err) {
-      alert('error while sending request:\n' + err.message);
-    };
+    axios.post(logInUrl, data)
+    .then((res) => {
+      // res.data = token
+      // set auth state, place token in req.headers and local storage 
+      axios.defaults.headers.common = {'Authorization': `Bearer ${res.data}`};
+      localStorage.setItem('token', res.data);
+      setIsAuthenticated(true);
+      alert('Welcome back!');
+    })
+    .catch((err) => {
+      alert('error when logging in, please try again');
+    });
   };
 
   return(
