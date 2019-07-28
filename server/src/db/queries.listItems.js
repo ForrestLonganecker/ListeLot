@@ -45,4 +45,18 @@ module.exports = {
       callback(err);
     });
   },
+  completed(updateInfo, callback){
+    ListItem.update({
+      isComplete: updateInfo.completed
+    }, {where: {
+      id: updateInfo.listItemId,
+      listId: updateInfo.listId
+    }})
+    .then((res) => {
+      callback(null, res);
+    })
+    .catch((err) => {
+      callback(err);
+    });
+  },
 };

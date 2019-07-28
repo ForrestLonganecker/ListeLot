@@ -110,7 +110,7 @@ describe('routes: listItems', () => {
     it('should delete the listItem with the specified id', (done) => {
       let data = {
         listItemId: this.listItem.id,
-        listId: this.listItem.id
+        listId: this.listItem.listId
       };
 
       addToken(this.token);
@@ -137,7 +137,7 @@ describe('routes: listItems', () => {
     it('should not delete the listItem when not authenticated', (done) => {
       let data = {
         listItemId: this.listItem.id,
-        listId: this.listItem.id
+        listId: this.listItem.listId
       };
 
       axios.post(`${base}delete`, data)
@@ -168,7 +168,7 @@ describe('routes: listItems', () => {
       let data = {
         updatedText: 'updated text',
         listItemId: this.listItem.id,
-        listId: this.listItem.id
+        listId: this.listItem.listId
       };
 
       addToken(this.token);
@@ -189,7 +189,7 @@ describe('routes: listItems', () => {
       let data = {
         updatedText: 'updated text',
         listItemId: this.listItem.id,
-        listId: this.listItem.id
+        listId: this.listItem.listId
       };
 
       axios.post(`${base}update`, data)
@@ -205,6 +205,58 @@ describe('routes: listItems', () => {
     });
 
     // END UPDATE LIST ITEMS TEST
+  });
+
+  describe('POST /listItems/completed', () => {
+
+    it('should change isComplete for the selected list item', (done) => {
+      let data = {
+        completed: true,
+        listItemId: this.listItem.id,
+        listId: this.listItem.listId
+      };
+
+      addToken(this.token);
+      axios.post(`${base}completed`, data)
+      .then((res) => {
+        removeToken();
+        expect(res.status).toBe(200);
+        ListItem.findByPk(this.listItem.id)
+        .then((listItem) => {
+          expect(listItem.isComplete).toBeTruthy();
+          done();
+        })
+        .catch((err) => {
+          expect(err).toBeNull();
+          done();
+        });
+      })
+      .catch((err) => {
+        expect(err).toBeNull();
+        done();
+      });
+    });
+
+    it('should not change isComplete if not authenticated', (done) => {
+      let data = {
+        completed: true,
+        listItemId: this.listItem.id,
+        listId: this.listItem.listId
+      };
+
+      axios.post(`${base}completed`, data)
+      .then((res) => {
+        // expect errors
+        expect(res).toBeNull();
+        done();
+      })
+      .catch((err) => {
+        expect(err.request.res.statusMessage).toBe('error while authenticating');
+        done();
+      });
+    });
+
+    // END COMPLETED LIST ITEMS TEST
   });
 
   // END LIST ITEMS INTEGRATION SPEC
