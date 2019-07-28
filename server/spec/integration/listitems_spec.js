@@ -263,7 +263,7 @@ describe('routes: listItems', () => {
 
     it('should return an array of list items for the selected list', (done) => {
       let data = {
-        listId: this.listId
+        listId: this.list.id
       };
 
       // add another item to the list

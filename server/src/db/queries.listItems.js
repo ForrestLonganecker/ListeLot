@@ -59,4 +59,17 @@ module.exports = {
       callback(err);
     });
   },
+  getAll(listId, callback){
+    ListItem.findAll({where: {listId: listId}})
+    .then((items) => {
+      let listItems = items.map(item => {
+        return item.dataValues;
+      });
+      
+      callback(null, listItems);
+    })
+    .catch((err) => {
+      callback(err);
+    });
+  },
 };
