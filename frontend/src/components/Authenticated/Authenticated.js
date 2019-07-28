@@ -18,7 +18,7 @@ import CurrentList from '../CurrentList/CurrentList';
 
 const Authenticated = ({ isAuthenticated, setIsAuthenticated }) => {
 
-  const [activeList, setActiveList] = useState([{id: 0, title: 'something', isComplete: false}]);
+  const [activeList, setActiveList] = useState();
 
   const handleDisplay = (viewState) => {
 

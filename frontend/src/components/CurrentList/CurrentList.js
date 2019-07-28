@@ -1,15 +1,44 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 import './CurrentList.css';
 
 import ListItem from '../ListItem/ListItem';
 import ListItemCreator from '../ListItemCreator/ListItemCreator';
 
+let activeListUrl;
+if(process.env.NODE_ENV === 'production'){
+  activeListUrl = 'https://listelot.herokuapp.com/listItems/activeList'
+};
+if(process.env.NODE_ENV === 'development'){
+  activeListUrl = 'http://localhost:4000/listItems/activeList'; 
+};
+
 const CurrentList = ({ activeList, setActiveList }) => {
 
   // modify this list to keep state current
   const [currentList, setCurrentList] = useState(activeList);
+  const [currentItems, setCurrentItems] = useState();
+
+
+  useEffect(() => {
+    if(currentList){
+      let data = {
+        listId: activeList.id
+      };
+
+      axios.post(activeListUrl, data)
+      .then((res) => {
+        console.log(res.data);
+        let returnList = res.data.reverse();
+        setCurrentItems(returnList);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+    }
+  }, [currentList]);
 
   // const handleDisplay = () => {
   //   if(activeList){
@@ -22,9 +51,9 @@ const CurrentList = ({ activeList, setActiveList }) => {
   return(
     <div className="current-list-wrapper">
     <button className="close-list-button" type="button" onClick={() => {setActiveList()}}>X</button>
-      <ListItemCreator listTitle={currentList[0].title} listId={currentList[0].id} />
+      <ListItemCreator listTitle={currentList.title} listId={currentList.id} />
       <div className="current-list-container">
-        <ListItem listId={currentList[0].id}  />
+        <ListItem listId={currentList.id}  />
       </div>
     </div>
   );

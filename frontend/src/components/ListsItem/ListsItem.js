@@ -15,7 +15,7 @@ if(process.env.NODE_ENV === 'development'){
   editListUrl = 'http://localhost:4000/lists/update'; 
 }
 
-const ListsItem = ({ list, setDeletedList, setEditingList }) => {
+const ListsItem = ({ list, setDeletedList, setEditingList, selectList }) => {
 
   const [currentlyEditing, setCurrentlyEditing] = useState(false);
   const [editTitle, setEditTitle] = useState('');
@@ -63,7 +63,7 @@ const ListsItem = ({ list, setDeletedList, setEditingList }) => {
           <div className="lists-button-container">
             <button className="delete-lists-item-button" type="button" onClick={() => handleDelete(list.id)}>delete</button>
             <button className="lists-item-button" type="button" onClick={() => setCurrentlyEditing(!currentlyEditing)}>edit</button>
-            <button className="lists-item-button" type="button">select</button>
+            <button className="lists-item-button" type="button" onClick={() => selectList(list)}>select</button>
           </div>
           <form className="editing-list-form" onSubmit={handleEdit}>
             <input className="edit-list-title-input" type="text" defaultValue={list.title} onChange={(e) => setEditTitle(e.target.value)} />
@@ -78,7 +78,7 @@ const ListsItem = ({ list, setDeletedList, setEditingList }) => {
           <div className="lists-button-container">
             <button className="delete-lists-item-button" type="button" onClick={() => handleDelete(list.id)}>delete</button>
             <button className="lists-item-button" type="button" onClick={() => setCurrentlyEditing(!currentlyEditing)}>edit</button>
-            <button className="lists-item-button" type="button">select</button>
+            <button className="lists-item-button" type="button" onClick={() => selectList(list)}>select</button>
           </div>
         </div>
       );

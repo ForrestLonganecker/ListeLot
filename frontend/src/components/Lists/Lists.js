@@ -22,7 +22,14 @@ const Lists = ({ activeList, setActiveList }) => {
   const [editingList, setEditingList] = useState();
   // sets the state from child, will need to pass up to parent, possibly a fn
   // passed down to child that will be called here to setActiveList in authenticated
-  // const [selectedList, setSelectedList] = useState();
+  const [selectedList, setSelectedList] = useState();
+
+  const selectList = (list) => {
+
+    setSelectedList(list);
+    setActiveList(selectedList);
+  };
+
 
   useEffect(() => {
     axios.get(getListsUrl)
@@ -59,7 +66,7 @@ const Lists = ({ activeList, setActiveList }) => {
       // create the return item out of the updatedList array
       let returnLists = updatedLists.map((list) => {
         return(
-          <ListsItem key={list.id} list={list} setDeletedList={setDeletedList} setEditingList={setEditingList} />
+          <ListsItem key={list.id} list={list} setDeletedList={setDeletedList} setEditingList={setEditingList} selectList={selectList} />
         );
       });
 

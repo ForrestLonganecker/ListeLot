@@ -290,7 +290,7 @@ describe('routes: listItems', () => {
       });
     });
 
-    it('should return an array of list items for the selected list', (done) => {
+    it('should not return items if not authenticated', (done) => {
       let data = {
         listId: this.listId
       };
