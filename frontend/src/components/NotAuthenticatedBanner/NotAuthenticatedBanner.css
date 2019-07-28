@@ -1,6 +1,9 @@
 .not-auth-banner-container{
   background-color: #590052;
   height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .not-auth-site-title{
