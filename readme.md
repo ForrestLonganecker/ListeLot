@@ -17,6 +17,8 @@ Users should be able to log in and view lists that they have created previously.
 
 ### Server:
 
+(Hosted on Heroku)
+
 I built this app with an Express.js backend, using postgress to store user data and list information. At this point Users lists are private, but the way things are set up leaves the option to easily add in additional functionality, such as adding collaborators so multiple different Users can view the same lists.  
 ---
 
@@ -31,6 +33,8 @@ The only information passed to the frontend that involves the user is the user.e
 ---
 
 ### FrontEnd:
+
+(Hosted on Netlify)
 
 I am using React for the frontend framework, allowing minimal refresh, seperation of concerns based on components, and authentication via higher order components. I have chosen to use hooks as my form of state management. Storing all list data in state rather than localStorage to limit the memory impact of the app for the user. Because of the requirement of keeping the list updated with most recent changes we will be making requests locally and can easily update local state with those changes.
 
@@ -67,5 +71,7 @@ Currently there are some instances of repeditive code, for instance in the backe
 Similarly in the frontend I have routes set up that I use in different components that change depending on environment, I would like to abstract this into it's own file to pull from.
 
 I currently have cors set up to be very open. I would also like to make this more locked down, restricting access to only requesters.
+
+Given more time I would also create more scripts to streamline the development/deploy process
 
 ## Thank you for taking the time to look at my project, enjoy!
