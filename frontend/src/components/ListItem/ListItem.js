@@ -2,11 +2,16 @@ import React from 'react';
 
 import './ListItem.css';
 
-const ListItem = ({ listId }) => {
+const ListItem = ({ listId, text, isComplete }) => {
 
   return(
-    <div>
-      {listId}
+    <div className="lists-item-container">
+      <p className="lists-item-title">{text}</p>
+      <div className="lists-button-container">
+        <button className="delete-lists-item-button" type="button" >delete</button>
+        <button className="lists-item-button" type="button" >edit</button>
+        <button className="lists-item-button" type="button" >select</button>
+      </div>
     </div>
   );
 };

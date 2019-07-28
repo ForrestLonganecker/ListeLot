@@ -1,0 +1,78 @@
+.lists-item-container{
+  background-color: #aaffaa;
+  margin: 10px;
+  padding: 5px 0 5px 0;
+}
+
+.lists-button-container{
+  display: flex;
+  justify-content: space-around;
+}
+
+.delete-lists-item-button{
+  height: 30px;
+  width: 70px;
+  background-color: #AA0000;
+  color: #FFFFFF;
+  border-radius: 3px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.lists-item-button{
+  height: 30px;
+  width: 70px;
+  background-color: #7700ee;
+  color: #FFFFFF;
+  border-radius: 3px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.lists-item-title{
+  color: #002200;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.editing-list-form{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin: 5px;
+}
+
+.edit-list-title-input{
+  height: 30px;
+  width: 60%;
+  font-size: 16px;
+  background-color: #005511;
+  color: #EEFFDD;
+  padding-left: 5px;
+}
+
+.edit-list-title-input::placeholder{
+  font-size: 16px;
+  background-color: #005511;
+  color: #EEFFDD;
+  padding-left: 5px;
+}
+
+.edit-list-title-input:-webkit-autofill,
+.edit-list-title-input:-webkit-autofill:hover, 
+.edit-list-title-input:-webkit-autofill:focus{
+  -webkit-text-fill-color: #EEFFDD;
+  -webkit-box-shadow: 0 0 0px 1000px #005511 inset;
+  box-shadow: 0 0 0px 1000px #005511 inset;
+  padding-left: 5px;
+}
+
+.edit-list-button{
+  height: 30px;
+  
+  background-color: #7700ee;
+  color: #FFFFFF;
+  border-radius: 3px;
+  font-size: 16px;
+  font-weight: bold;
+}

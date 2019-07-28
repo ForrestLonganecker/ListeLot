@@ -40,20 +40,26 @@ const CurrentList = ({ activeList, setActiveList }) => {
     }
   }, [currentList]);
 
-  // const handleDisplay = () => {
-  //   if(activeList){
-  //     return(
+  const displayList = (inputList) => {
 
-  //     );
-  //   };
-  // };
+
+    if(inputList){
+      let returnList = inputList.map((item) => {
+        return(
+          <ListItem key={item.id} listId={currentList.id} text={item.text} isComplete={item.isComplete}/>
+        )
+      });
+      
+      return returnList
+    };
+  };
 
   return(
     <div className="current-list-wrapper">
     <button className="close-list-button" type="button" onClick={() => {setActiveList()}}>X</button>
       <ListItemCreator listTitle={currentList.title} listId={currentList.id} />
       <div className="current-list-container">
-        <ListItem listId={currentList.id}  />
+        {displayList(currentItems)}
       </div>
     </div>
   );
