@@ -6,6 +6,7 @@ import './Authenticated.css';
 
 import Banner from '../Banner/Banner';
 import Lists from '../Lists/Lists';
+import CurrentList from '../CurrentList/CurrentList';
 
 // let getListsUrl;
 // if(process.env.NODE_ENV === 'production'){
@@ -17,23 +18,25 @@ import Lists from '../Lists/Lists';
 
 const Authenticated = ({ isAuthenticated, setIsAuthenticated }) => {
 
-  // const [lists, setLists] = useState();
-  const [display, setDisplay] = useState('Lists');
-  const [activeList, setActiveList] = useState();
-  
-  // useEffect(() => {
-  //   axios.get(getListsUrl)
-  //   .then((res) => {
-  //     setLists(res.data.reverse());
-  //   })
-  //   .catch((err) => {
-  //   });
-  // }, [display]);
+  const [activeList, setActiveList] = useState([{id: 0, title: 'something', isComplete: false}]);
 
+  const handleDisplay = (viewState) => {
+
+    if(viewState){
+      return(
+        <CurrentList activeList={activeList} setActiveList={setActiveList} />
+      );
+    } else {
+      return(
+        <Lists activeList={activeList} setActiveList={setActiveList} />
+      );
+    };
+  };
+  
   return(
     <div className="authenticated-container">
       <Banner setIsAuthenticated={setIsAuthenticated} />
-      <Lists activeList={activeList} setActiveList={setActiveList} />
+      {handleDisplay(activeList)}
     </div>
   );
 };

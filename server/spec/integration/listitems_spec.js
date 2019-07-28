@@ -96,7 +96,6 @@ describe('routes: listItems', () => {
         done();
       })
       .catch((err) => {
-        console.log(err.message);
         expect(err).toBeNull();
         done();
       });

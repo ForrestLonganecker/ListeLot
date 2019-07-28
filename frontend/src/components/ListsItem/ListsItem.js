@@ -31,6 +31,7 @@ const ListsItem = ({ list, setDeletedList, setEditingList }) => {
       setDeletedList(deleteId);
     })
     .catch((err) => {
+      alert('something went wrong, please refresh or try again');
     }); 
   };
 
@@ -48,7 +49,6 @@ const ListsItem = ({ list, setDeletedList, setEditingList }) => {
         setEditingList(res.data);
       })
       .catch((err) => {
-        console.log(err);
         alert('Could not update list, please try again.');
       });
     };
