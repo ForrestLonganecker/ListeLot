@@ -22,7 +22,15 @@ const CurrentList = ({ activeList, setActiveList }) => {
 
   useEffect(() => {
 
-    const interval = setInterval(() => {
+    let data = {
+      listId: activeList.id
+    };
+
+    axios.post(activeListUrl, data)
+    .then((res) => {
+      setCurrentItems(res.data.reverse());
+
+      const interval = setInterval(() => {
         let data = {
           listId: activeList.id
         };
@@ -35,6 +43,11 @@ const CurrentList = ({ activeList, setActiveList }) => {
         });
     }, 5000);
     return () => clearInterval(interval);
+    })
+    .catch((err) => {
+    });
+
+
   }, [activeList.id]);
 
   const displayList = (inputList) => {
