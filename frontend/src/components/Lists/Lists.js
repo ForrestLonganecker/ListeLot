@@ -18,8 +18,6 @@ if(process.env.NODE_ENV === 'development'){
 const Lists = ({ activeList, setActiveList }) => {
 
   const [lists, setLists] = useState();
-  const [deletedList, setDeletedList] = useState();
-  const [editingList, setEditingList] = useState();
   // sets the state from child, will need to pass up to parent, possibly a fn
   // passed down to child that will be called here to setActiveList in authenticated
   const [selectedList, setSelectedList] = useState();
@@ -43,38 +41,13 @@ const Lists = ({ activeList, setActiveList }) => {
   const displayLists = (inputLists) => {
     
     if(inputLists){
-      let updatedLists = inputLists;
 
-      if(deletedList){
-        updatedLists = inputLists.filter(list => {
-          if(list.id !== deletedList){
-            return list;
-          };
-        });
-      };
-
-      if(editingList){
-        updatedLists = inputLists.map(list => {
-          if(list.id === editingList.id){
-            return editingList;
-          } else {
-            return list;
-          };
-        });
-      };
-      
       // create the return item out of the updatedList array
-      let returnLists = updatedLists.map((list) => {
+      let returnLists = inputLists.map((list) => {
         return(
-          <ListsItem key={list.id} list={list} setDeletedList={setDeletedList} setEditingList={setEditingList} selectList={selectList} />
+          <ListsItem key={list.id} list={list} setLists={setLists} lists={lists} selectList={selectList} />
         );
       });
-
-      // clear out deletedList and update local list state
-      if(deletedList){
-        setDeletedList(null);
-        setLists(updatedLists);
-      };
 
       return returnLists;  
     };

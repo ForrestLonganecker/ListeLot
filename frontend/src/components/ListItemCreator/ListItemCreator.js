@@ -29,12 +29,10 @@ const ListItemCreator = ({ listTitle, listId, setCurrentItems }) => {
 
       axios.post(createItemUrl, data)
       .then((res) => {
-
         setCurrentItems(items => [res.data, ...items])
-        console.log(res.data);
       })
       .catch((err) => {
-        console.log(err);
+        alert('something went wrong, please try again.');
       });
     };
   }

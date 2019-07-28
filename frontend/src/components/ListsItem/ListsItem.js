@@ -15,20 +15,26 @@ if(process.env.NODE_ENV === 'development'){
   editListUrl = 'http://localhost:4000/lists/update'; 
 }
 
-const ListsItem = ({ list, setDeletedList, setEditingList, selectList }) => {
+const ListsItem = ({ list, lists, setLists, selectList }) => {
 
   const [currentlyEditing, setCurrentlyEditing] = useState(false);
   const [editTitle, setEditTitle] = useState('');
 
-  const handleDelete = (deleteId) => {
+  const handleDelete = () => {
 
     let data = {
-      listId: deleteId
+      listId: list.id
     }
 
     axios.post(deleteListUrl, data)
     .then((res) => {
-      setDeletedList(deleteId);
+      let updatedLists = lists.filter((originalList) => {
+        if(originalList.id !== list.id){
+          return originalList;
+        };
+      });
+
+      setLists(updatedLists);
     })
     .catch((err) => {
       alert('something went wrong, please refresh or try again');
@@ -46,7 +52,16 @@ const ListsItem = ({ list, setDeletedList, setEditingList, selectList }) => {
 
       axios.post(editListUrl, data)
       .then((res) => {
-        setEditingList(res.data);
+
+        let updatedLists = lists.map((originalList) => {
+          if(originalList.id === list.id){
+            return res.data;
+          } else {
+            return originalList;
+          };
+        });
+
+        setLists(updatedLists);
       })
       .catch((err) => {
         alert('Could not update list, please try again.');
@@ -61,7 +76,7 @@ const ListsItem = ({ list, setDeletedList, setEditingList, selectList }) => {
         <div className="lists-item-container">
           <p className="lists-item-title">{list.title}</p>
           <div className="lists-button-container">
-            <button className="delete-lists-item-button" type="button" onClick={() => handleDelete(list.id)}>delete</button>
+            <button className="delete-lists-item-button" type="button" onClick={() => handleDelete()}>delete</button>
             <button className="lists-item-button" type="button" onClick={() => setCurrentlyEditing(!currentlyEditing)}>edit</button>
             <button className="lists-item-button" type="button" onClick={() => selectList(list)}>select</button>
           </div>

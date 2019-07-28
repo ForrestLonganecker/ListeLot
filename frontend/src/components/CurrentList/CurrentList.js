@@ -46,7 +46,7 @@ const CurrentList = ({ activeList, setActiveList }) => {
     if(inputList){
       let returnList = inputList.map((item) => {
         return(
-          <ListItem key={item.id} listId={currentList.id} text={item.text} isComplete={item.isComplete}/>
+          <ListItem key={item.id} currentItem={item} setCurrentItems={setCurrentItems} currentItems={currentItems} />
         )
       });
       
