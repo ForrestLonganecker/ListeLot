@@ -15,4 +15,13 @@ module.exports = {
       callback(err);
     });
   },
-}
+  destroy(listItemId, callback){
+    ListItem.destroy({where: {id: listItemId}})
+    .then((deletedListItem) => {
+      callback(null, deletedListItem);
+    })
+    .catch((err) => {
+      callback(err);
+    });
+  },
+};

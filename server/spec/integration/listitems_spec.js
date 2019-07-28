@@ -109,7 +109,8 @@ describe('routes: listItems', () => {
 
     it('should delete the listItem with the specified id', (done) => {
       let data = {
-        listItemId: this.listItem.id
+        listItemId: this.listItem.id,
+        listId: this.listItem.id
       };
 
       addToken(this.token);
@@ -135,7 +136,8 @@ describe('routes: listItems', () => {
 
     it('should not delete the listItem when not authenticated', (done) => {
       let data = {
-        listItemId: this.listItem.id
+        listItemId: this.listItem.id,
+        listId: this.listItem.id
       };
 
       axios.post(`${base}delete`, data)
