@@ -9,7 +9,7 @@ View the deployed app:
 
 ### General:
 
-ListeLot is a realtime list app, the objective was to have a list update as you change things. This way as you mark items off on of a list other people will see those changes as they happen. Because the items update in realtime, you are able to ensure that no duplicate items are collected.  
+ListeLot is a realtime list app, the objective was to have a list update as you change things. This way as you mark items off on a list, other people will see those changes as they happen. Because the items update in realtime, you are able to ensure that no duplicate items are collected.  
 
 Users should be able to log in and view lists that they have created previously. If you view the same list from two devices they should stay up to date with the changes that one device makes.
 
