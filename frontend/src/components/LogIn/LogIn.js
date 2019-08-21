@@ -53,7 +53,7 @@ const LogIn = ({ setActiveView, setIsAuthenticated }) => {
 
         <div className="button-container">
         <button className="main-button" type="submit">Log in</button>
-        <button className="secondary-button" type="button" onClick={() => setActiveView('sign up')}>Sign up?</button>
+        <button className="sign-up-button" type="button" onClick={() => setActiveView('sign up')}>Sign up?</button>
         </div>
       </form>
     </div>
