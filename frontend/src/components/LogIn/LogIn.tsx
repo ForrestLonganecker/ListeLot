@@ -5,7 +5,7 @@ import axios from 'axios';
 import './LogIn.css';
 
 // set up routes
-let logInUrl;
+let logInUrl: string;
 if(process.env.NODE_ENV === 'production'){
   logInUrl = 'https://listelot.herokuapp.com/users/logIn'
 }
@@ -15,13 +15,13 @@ if(process.env.NODE_ENV === 'development'){
 
 // pass in setActiveView to toggle between signup/login
 // setIsAuthenticated to toggle view change
-const LogIn = ({ setActiveView, setIsAuthenticated }) => {
+const LogIn = ({ setActiveView, setIsAuthenticated }: {setActiveView: Function, setIsAuthenticated: Function}) => {
 
   // set up input field state
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogIn = (e) => {
+  const handleLogIn = (e: React.FormEvent<HTMLFormElement> ) => {
     // prevent page refresh
     e.preventDefault();
 

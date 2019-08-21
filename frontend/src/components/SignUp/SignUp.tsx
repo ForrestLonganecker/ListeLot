@@ -5,7 +5,7 @@ import axios from 'axios';
 import './SignUp.css';
 
 // set up routes
-let signUpUrl;
+let signUpUrl: string;
 if(process.env.NODE_ENV === 'production'){
   signUpUrl = 'https://listelot.herokuapp.com/users/create'
 }
@@ -13,14 +13,14 @@ if(process.env.NODE_ENV === 'development'){
   signUpUrl = 'http://localhost:4000/users/create'; 
 }
 
-const SignUp = ({ setActiveView, setIsAuthenticated }) => {
+const SignUp = ({ setActiveView, setIsAuthenticated }: {setActiveView: Function, setIsAuthenticated: Function}) => {
   
   // set up input field state
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
 
-  const handleSignUp = (e) => {
+  const handleSignUp = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     // check if passwords match

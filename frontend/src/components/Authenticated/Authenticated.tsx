@@ -9,11 +9,11 @@ import CurrentList from '../CurrentList/CurrentList';
 
 
 // when authenticated we display this component
-const Authenticated = ({ setIsAuthenticated }) => {
+const Authenticated = ({ setIsAuthenticated }: {setIsAuthenticated: Function}) => {
 
   const [activeList, setActiveList] = useState();
 
-  const handleDisplay = (viewState) => {
+  const handleDisplay = (viewState: Array<String>) => {
 
     if(viewState){
       return(
