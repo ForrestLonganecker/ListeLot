@@ -1,5 +1,6 @@
 "use strict";
-// Actions defined for static routes
+Object.defineProperty(exports, "__esModule", { value: true });
+;
 module.exports = {
     index: function (req, res) {
         res.send('Hello ListeLot!');

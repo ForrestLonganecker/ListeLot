@@ -1,7 +1,13 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var authHelpers = require('../helpers/auth');
 var listQueries = require('../db/queries.lists');
 var userQueries = require('../db/queries.users');
+;
+;
+;
+;
+;
 module.exports = {
     create: function (req, res) {
         var token = authHelpers.hasToken(req);

@@ -15,6 +15,7 @@ module.exports = {
           callback(null, user);
         })
         .catch((err) => {
+          let err = 'error creating user'
           callback(err);
         });
       };

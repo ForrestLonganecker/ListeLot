@@ -1,12 +1,39 @@
+export {};
 const authHelpers = require('../helpers/auth');
 const listQueries = require('../db/queries.lists');
 const userQueries = require('../db/queries.users');
 
+interface Req {
+  body: Body
+};
+
+interface Body {
+  title: string,
+  listId: number,
+  updatedTitle: string
+};
+
+interface Res {
+  status: any,
+  sendStatus: Function,
+  statusMessage: string,
+  end: Function,
+  send: Function
+};
+
+interface User {
+  id: number
+};
+
+interface List {
+  id: number
+};
+
 module.exports = {
-  create(req, res){
+  create(req: Req, res: Res){
     let token = authHelpers.hasToken(req);
     if(token){
-      userQueries.getUser(token.email, (err, user) => {
+      userQueries.getUser(token.email, (err: string, user: User) => {
         if(err){
           res.status(400);
           res.statusMessage = 'Credentials do not match';
@@ -18,7 +45,7 @@ module.exports = {
           };
 
 
-          listQueries.createList(newList, (err, list) => {
+          listQueries.createList(newList, (err: string, list: Array<List>) => {
             if(err){
               res.status(400);
               res.statusMessage = 'error while creating list.';
@@ -37,10 +64,10 @@ module.exports = {
       res.end();
     };
   },
-  delete(req, res){
+  delete(req: Req, res: Res){
     let token = authHelpers.hasToken(req);
     if(token){
-      userQueries.getUser(token.email, (err, user) => {
+      userQueries.getUser(token.email, (err: string, user: User) => {
         if(err){
           res.status(400);
           res.statusMessage = 'credentials do not match.';
@@ -51,7 +78,7 @@ module.exports = {
             userId: user.id
           };
 
-          listQueries.destroy(deleteInfo, (err, deletedList) => {
+          listQueries.destroy(deleteInfo, (err: string, deletedList: List) => {
             if(err){
               res.status(400);
               res.statusMessage = 'error creating list.';
@@ -68,11 +95,11 @@ module.exports = {
       res.end();
     };
   },
-  update(req, res){
+  update(req: Req, res: Res){
     let token = authHelpers.hasToken(req);
 
     if(token){
-      userQueries.getUser(token.email, (err, user) => {
+      userQueries.getUser(token.email, (err: string, user: User) => {
         if(err){
           res.status(400);
           res.statusMessage = 'error when authenticating';
@@ -84,7 +111,7 @@ module.exports = {
             userId: user.id
           };
 
-          listQueries.update(updateInfo, (err, updatedList) => {
+          listQueries.update(updateInfo, (err: string, updatedList: List) => {
             if(err){
               res.status(400);
               res.statusMessage = 'error updating list'
@@ -101,17 +128,17 @@ module.exports = {
       res.end();
     };
   },
-  getAll(req, res){
+  getAll(req: Req, res: Res){
     let token = authHelpers.hasToken(req);
 
     if(token){
-      userQueries.getUser(token.email, (err, user) => {
+      userQueries.getUser(token.email, (err: string, user: User) => {
         if(err){
           res.status(400);
           res.statusMessage = 'error when authenticating';
           res.end();
         } else {
-          listQueries.getAll(user.id, (err, lists) => {
+          listQueries.getAll(user.id, (err: string, lists: Array<List>) => {
             if(err){
               res.status(400);
               res.statusMessage = 'error fetching lists';

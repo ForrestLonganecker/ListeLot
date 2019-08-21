@@ -1,19 +1,47 @@
+export {};
 // import helper functions
 const authHelpers = require('../helpers/auth');
 // import database manipulation functions
 const userQueries = require('../db/queries.users');
 
+interface Req {
+  body: Body
+};
+
+interface Body {
+  email: string,
+  password: string,
+};
+
+interface Res {
+  status: any,
+  sendStatus: Function,
+  statusMessage: string,
+  end: Function,
+  send: Function
+};
+
+interface User {
+  id: number,
+  email: string,
+  password: string
+};
+
+interface List {
+  id: number
+};
+
 module.exports = {
-  create(req, res){
+  create(req: Req, res: Res){
     let newUser = {
       email: req.body.email,
       password: authHelpers.encryptPassword(req.body.password)
     };
 
-    userQueries.createUser(newUser, (err, user) => {
+    userQueries.createUser(newUser, (err: string, user: User) => {
       if(err){
         res.status(400);
-        res.statusMessage = err.message;
+        res.statusMessage = err;
         res.end()
       } else {
         
@@ -29,8 +57,8 @@ module.exports = {
       };
     });
   },
-  logIn(req, res){
-    userQueries.getUser(req.body.email, (err, user) => {
+  logIn(req: Req, res: Res){
+    userQueries.getUser(req.body.email, (err: string, user: User) => {
       if(err){
         res.status(400);
         res.statusMessage = 'Log in credentials do not match.';
@@ -50,12 +78,12 @@ module.exports = {
       };
     });
   },
-  authenticate(req, res){
+  authenticate(req: Req, res: Res){
     // if there is a token that matches in the req return it, else false
     let token = authHelpers.hasToken(req);
     if(token){
       // check for user in db
-      userQueries.getUser(token.email, (err, user) => {
+      userQueries.getUser(token.email, (err: string, user: User) => {
         if(err){
           res.status(400);
           res.statusMessage = 'Not authenticated';

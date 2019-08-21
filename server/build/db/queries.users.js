@@ -16,6 +16,7 @@ module.exports = {
                     callback(null, user);
                 })
                     .catch(function (err) {
+                    var err = 'error creating user';
                     callback(err);
                 });
             }

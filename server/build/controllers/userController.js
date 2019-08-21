@@ -1,8 +1,14 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 // import helper functions
 var authHelpers = require('../helpers/auth');
 // import database manipulation functions
 var userQueries = require('../db/queries.users');
+;
+;
+;
+;
+;
 module.exports = {
     create: function (req, res) {
         var newUser = {
@@ -12,7 +18,7 @@ module.exports = {
         userQueries.createUser(newUser, function (err, user) {
             if (err) {
                 res.status(400);
-                res.statusMessage = err.message;
+                res.statusMessage = err;
                 res.end();
             }
             else {
