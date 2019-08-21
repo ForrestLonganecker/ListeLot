@@ -17,6 +17,11 @@ interface Props {
   setLists: Function
 }
 
+interface List {
+  id: number,
+  title: string
+}
+
 const ListCreator = ({ setLists }: Props) => {
 
   // title state for new List
@@ -39,7 +44,7 @@ const ListCreator = ({ setLists }: Props) => {
       axios.post(createListUrl, data)
       .then((res) => {
         // pass up the addition (res.data === newList)
-        setLists((lists: Array<Object>) => [res.data, ...lists]);
+        setLists((lists: Array<List>) => [res.data, ...lists]);
         // reset the title state to clear the field
         setTitle('')
       })
