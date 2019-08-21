@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var express = require('express');
 var app = express();
 var mainConfig = require('./config/main-config');

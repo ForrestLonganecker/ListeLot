@@ -22,5 +22,3 @@ function normalizePort(val: string){
 server.on('listening', () => {
   console.log(`ListeLot listening on port ${port}`);  
 });
-
-export {};

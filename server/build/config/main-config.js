@@ -4,7 +4,7 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 module.exports = {
-    init: function (app, express) {
+    init: function (app) {
         app.use(logger('dev'));
         app.use(cors());
         app.use(bodyParser.json());

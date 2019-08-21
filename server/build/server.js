@@ -1,5 +1,4 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 require('dotenv').config();
 var app = require('./app');
 var http = require('http');

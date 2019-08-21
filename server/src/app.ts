@@ -1,5 +1,6 @@
-const express = require('express')
-const app = express();
+export {};
+const express = require('express');
+const app: Express.Application = express();
 
 const mainConfig = require('./config/main-config');
 const routeConfig = require('./config/route-config');
