@@ -19,7 +19,7 @@ const Authenticator = () => {
   }, []);
 
   // depending on authentication state we will display:
-  const handleDisplay = (authBoolean) => {
+  const handleDisplay = (authBoolean: boolean) => {
     switch(authBoolean){
       case false:
         return <NotAuthenticated setIsAuthenticated={setIsAuthenticated} />;

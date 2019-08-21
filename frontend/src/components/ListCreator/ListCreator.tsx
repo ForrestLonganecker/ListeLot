@@ -5,7 +5,7 @@ import axios from 'axios';
 import './ListCreator.css';
 
 // set up routes
-let createListUrl;
+let createListUrl: string;
 if(process.env.NODE_ENV === 'production'){
   createListUrl = 'https://listelot.herokuapp.com/lists/create'
 }
@@ -13,12 +13,21 @@ if(process.env.NODE_ENV === 'development'){
   createListUrl = 'http://localhost:4000/lists/create'; 
 }
 
-const ListCreator = ({ setLists }) => {
+interface Props {
+  setLists: Function
+}
+
+interface List {
+  id: number,
+  title: string
+}
+
+const ListCreator = ({ setLists }: Props) => {
 
   // title state for new List
   const [title, setTitle] = useState('');
 
-  const handleCreateList = (e) => {
+  const handleCreateList = (e: React.FormEvent<HTMLFormElement>) => {
     // prevent the form from refreshing the page
     e.preventDefault();
 
@@ -35,7 +44,7 @@ const ListCreator = ({ setLists }) => {
       axios.post(createListUrl, data)
       .then((res) => {
         // pass up the addition (res.data === newList)
-        setLists(lists => [res.data, ...lists]);
+        setLists((lists: Array<List>) => [res.data, ...lists]);
         // reset the title state to clear the field
         setTitle('')
       })

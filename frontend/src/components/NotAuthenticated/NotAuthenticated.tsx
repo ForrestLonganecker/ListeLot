@@ -7,12 +7,16 @@ import LogIn from '../LogIn/LogIn';
 import SignUp from '../SignUp/SignUp';
 import NotAuthenticatedBanner from '../NotAuthenticatedBanner/NotAuthenticatedBanner';
 
-const NotAuthenticated = ({ setIsAuthenticated }) => {
+interface Props {
+  setIsAuthenticated: Function
+}
+
+const NotAuthenticated = ({ setIsAuthenticated }: Props) => {
 
   const [activeView, setActiveView] = useState('');
 
   // sets display based on view state
-  const handleDisplay = (view) => {
+  const handleDisplay = (view: string) => {
     switch(view){
       case 'log in':
         return <LogIn setActiveView={setActiveView} setIsAuthenticated={setIsAuthenticated} />;

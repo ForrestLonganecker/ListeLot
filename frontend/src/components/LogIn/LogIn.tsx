@@ -5,7 +5,7 @@ import axios from 'axios';
 import './LogIn.css';
 
 // set up routes
-let logInUrl;
+let logInUrl: string;
 if(process.env.NODE_ENV === 'production'){
   logInUrl = 'https://listelot.herokuapp.com/users/logIn'
 }
@@ -13,15 +13,20 @@ if(process.env.NODE_ENV === 'development'){
   logInUrl = 'http://localhost:4000/users/logIn'; 
 }
 
+interface Props {
+  setActiveView: Function,
+  setIsAuthenticated: Function
+}
+
 // pass in setActiveView to toggle between signup/login
 // setIsAuthenticated to toggle view change
-const LogIn = ({ setActiveView, setIsAuthenticated }) => {
+const LogIn = ({ setActiveView, setIsAuthenticated }: Props) => {
 
   // set up input field state
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogIn = (e) => {
+  const handleLogIn = (e: React.FormEvent<HTMLFormElement> ) => {
     // prevent page refresh
     e.preventDefault();
 
@@ -53,7 +58,7 @@ const LogIn = ({ setActiveView, setIsAuthenticated }) => {
 
         <div className="button-container">
         <button className="main-button" type="submit">Log in</button>
-        <button className="secondary-button" type="button" onClick={() => setActiveView('sign up')}>Sign up?</button>
+        <button className="sign-up-button" type="button" onClick={() => setActiveView('sign up')}>Sign up?</button>
         </div>
       </form>
     </div>

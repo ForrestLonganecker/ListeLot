@@ -7,13 +7,16 @@ import Banner from '../Banner/Banner';
 import Lists from '../Lists/Lists';
 import CurrentList from '../CurrentList/CurrentList';
 
+interface Props {
+  setIsAuthenticated: Function
+}
 
 // when authenticated we display this component
-const Authenticated = ({ setIsAuthenticated }) => {
+const Authenticated = ({ setIsAuthenticated }: Props) => {
 
   const [activeList, setActiveList] = useState();
 
-  const handleDisplay = (viewState) => {
+  const handleDisplay = (viewState: Array<String>) => {
 
     if(viewState){
       return(
