@@ -13,7 +13,12 @@ if(process.env.NODE_ENV === 'development'){
   signUpUrl = 'http://localhost:4000/users/create'; 
 }
 
-const SignUp = ({ setActiveView, setIsAuthenticated }: {setActiveView: Function, setIsAuthenticated: Function}) => {
+interface Props {
+  setActiveView: Function,
+  setIsAuthenticated: Function
+}
+
+const SignUp = ({ setActiveView, setIsAuthenticated }: Props) => {
   
   // set up input field state
   const [email, setEmail] = useState('');

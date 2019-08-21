@@ -5,7 +5,7 @@ import axios from 'axios';
 import './ListItemCreator.css';
 
 // set up routes
-let createItemUrl;
+let createItemUrl: string;
 if(process.env.NODE_ENV === 'production'){
   createItemUrl = 'https://listelot.herokuapp.com/listItems/create'
 }
@@ -13,11 +13,17 @@ if(process.env.NODE_ENV === 'development'){
   createItemUrl = 'http://localhost:4000/listItems/create'; 
 }
 
-const ListItemCreator = ({ listTitle, listId, setCurrentItems }) => {
+interface Props {
+  listTitle: string,
+  listId: number,
+  setCurrentItems: Function
+}
+
+const ListItemCreator = ({ listTitle, listId, setCurrentItems }: Props) => {
 
   const [text, setText] = useState('');
 
-  const handleCreateItem = (e) => {
+  const handleCreateItem = (e: React.FormEvent<HTMLFormElement>) => {
     // prevent page refresh
     e.preventDefault();
 
@@ -32,7 +38,7 @@ const ListItemCreator = ({ listTitle, listId, setCurrentItems }) => {
       axios.post(createItemUrl, data)
       .then((res) => {
         // add new item to the top of list
-        setCurrentItems(items => [res.data, ...items]);
+        setCurrentItems((items: Array<String>) => [res.data, ...items]);
         // clear input field
         setText('');
       })

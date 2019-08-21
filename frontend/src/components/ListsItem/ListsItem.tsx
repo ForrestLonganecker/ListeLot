@@ -5,8 +5,8 @@ import axios from 'axios';
 import './ListsItem.css';
 
 // set up routes
-let deleteListUrl;
-let editListUrl;
+let deleteListUrl: string;
+let editListUrl: string;
 if(process.env.NODE_ENV === 'production'){
   deleteListUrl = 'https://listelot.herokuapp.com/lists/delete'
   editListUrl = 'https://listelot.herokuapp.com/lists/update'
@@ -16,8 +16,20 @@ if(process.env.NODE_ENV === 'development'){
   editListUrl = 'http://localhost:4000/lists/update'; 
 }
 
+interface Props {
+  list: List,
+  lists: Array<List>,
+  setLists: Function,
+  selectList: Function
+}
+
+interface List {
+  id: number,
+  title?: string
+}
+
 // take in list, the ability to modify the list of lists and select active list
-const ListsItem = ({ list, lists, setLists, selectList }) => {
+const ListsItem = ({ list, lists, setLists, selectList }: Props) => {
 
   // currently editing state used for changing view, and edit title used for update
   const [currentlyEditing, setCurrentlyEditing] = useState(false);
@@ -50,7 +62,7 @@ const ListsItem = ({ list, lists, setLists, selectList }) => {
     }); 
   };
 
-  const handleEdit = (e) => {
+  const handleEdit = (e: React.FormEvent<HTMLFormElement>) => {
     // prevent page refresh
     e.preventDefault();
 
@@ -89,7 +101,7 @@ const ListsItem = ({ list, lists, setLists, selectList }) => {
 
 
   // pass in editingState to toggle edit input view
-  const handleDisplay = (editingState) => {
+  const handleDisplay = (editingState: boolean) => {
 
     if(editingState){
       return(
@@ -111,7 +123,7 @@ const ListsItem = ({ list, lists, setLists, selectList }) => {
         <div className="lists-item-container">
           <p className="lists-item-title">{list.title}</p>
           <div className="lists-button-container">
-            <button className="delete-lists-item-button" type="button" onClick={() => handleDelete(list.id)}>delete</button>
+            <button className="delete-lists-item-button" type="button" onClick={() => handleDelete()}>delete</button>
             <button className="lists-item-button" type="button" onClick={() => setCurrentlyEditing(!currentlyEditing)}>edit</button>
             <button className="lists-item-button" type="button" onClick={() => selectList(list)}>select</button>
           </div>

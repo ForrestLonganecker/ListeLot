@@ -7,9 +7,12 @@ import Banner from '../Banner/Banner';
 import Lists from '../Lists/Lists';
 import CurrentList from '../CurrentList/CurrentList';
 
+interface Props {
+  setIsAuthenticated: Function
+}
 
 // when authenticated we display this component
-const Authenticated = ({ setIsAuthenticated }: {setIsAuthenticated: Function}) => {
+const Authenticated = ({ setIsAuthenticated }: Props) => {
 
   const [activeList, setActiveList] = useState();
 

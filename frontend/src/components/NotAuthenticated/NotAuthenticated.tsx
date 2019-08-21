@@ -7,7 +7,11 @@ import LogIn from '../LogIn/LogIn';
 import SignUp from '../SignUp/SignUp';
 import NotAuthenticatedBanner from '../NotAuthenticatedBanner/NotAuthenticatedBanner';
 
-const NotAuthenticated = ({ setIsAuthenticated }: {setIsAuthenticated: Function}) => {
+interface Props {
+  setIsAuthenticated: Function
+}
+
+const NotAuthenticated = ({ setIsAuthenticated }: Props) => {
 
   const [activeView, setActiveView] = useState('');
 

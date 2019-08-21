@@ -3,7 +3,11 @@ import axios from 'axios';
 
 import './Banner.css';
 
-const Banner = ({ setIsAuthenticated }) => {
+interface Props {
+  setIsAuthenticated: Function
+}
+
+const Banner = ({ setIsAuthenticated }: Props) => {
 
   const handleLogOut = () => {
     // remove the token from the request headers and localStorage as you log out

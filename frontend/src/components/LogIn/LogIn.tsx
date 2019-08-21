@@ -13,9 +13,14 @@ if(process.env.NODE_ENV === 'development'){
   logInUrl = 'http://localhost:4000/users/logIn'; 
 }
 
+interface Props {
+  setActiveView: Function,
+  setIsAuthenticated: Function
+}
+
 // pass in setActiveView to toggle between signup/login
 // setIsAuthenticated to toggle view change
-const LogIn = ({ setActiveView, setIsAuthenticated }: {setActiveView: Function, setIsAuthenticated: Function}) => {
+const LogIn = ({ setActiveView, setIsAuthenticated }: Props) => {
 
   // set up input field state
   const [email, setEmail] = useState('');

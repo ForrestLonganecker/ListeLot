@@ -9,7 +9,7 @@ import ListItemCreator from '../ListItemCreator/ListItemCreator';
 
 
 // set up routes for production/development
-let activeListUrl;
+let activeListUrl: string;
 if(process.env.NODE_ENV === 'production'){
   activeListUrl = 'https://listelot.herokuapp.com/listItems/activeList'
 };
@@ -17,7 +17,24 @@ if(process.env.NODE_ENV === 'development'){
   activeListUrl = 'http://localhost:4000/listItems/activeList'; 
 };
 
-const CurrentList = ({ activeList, setActiveList }) => {
+interface Props {
+  activeList: List,
+  setActiveList: Function
+}
+
+interface List {
+  id: number,
+  title: string
+}
+
+interface Item {
+  id: number,
+  listId: number,
+  isComplete: boolean,
+  text: string
+}
+
+const CurrentList = ({ activeList, setActiveList }: Props) => {
 
   // set up state for items in the active list 
   const [currentItems, setCurrentItems] = useState();
@@ -48,7 +65,7 @@ const CurrentList = ({ activeList, setActiveList }) => {
   // run this use effect every time the activeList.id changes
   }, [activeList.id]);
 
-  const displayList = (inputList) => {
+  const displayList = (inputList: Array<Item>) => {
 
     if(inputList){
       // create the display list items 

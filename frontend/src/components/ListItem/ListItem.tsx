@@ -5,9 +5,9 @@ import axios from 'axios';
 import './ListItem.css';
 
 // set up routes
-let deleteItemUrl;
-let completedItemUrl;
-let updateItemUrl;
+let deleteItemUrl: string;
+let completedItemUrl: string;
+let updateItemUrl: string;
 if(process.env.NODE_ENV === 'production'){
   deleteItemUrl = 'https://listelot.herokuapp.com/listItems/delete'
   completedItemUrl = 'https://listelot.herokuapp.com/listItems/completed'
@@ -19,7 +19,20 @@ if(process.env.NODE_ENV === 'development'){
   updateItemUrl = 'http://localhost:4000/listItems/update'; 
 }
 
-const ListItem = ({ currentItem, setCurrentItems, currentItems }) => {
+interface Props {
+  currentItem: Item,
+  setCurrentItems: Function,
+  currentItems: Array<Item>
+}
+
+interface Item {
+  listId: number,
+  id: number,
+  isComplete: boolean,
+  text: string
+}
+
+const ListItem = ({ currentItem, setCurrentItems, currentItems }: Props) => {
 
   // set up state for toggling edit view state and edited text
   const [currentlyEditing, setCurrentlyEditing] = useState(false);
@@ -83,7 +96,7 @@ const ListItem = ({ currentItem, setCurrentItems, currentItems }) => {
     });
   };
 
-  const handleEdit = (e) => {
+  const handleEdit = (e: React.FormEvent<HTMLFormElement>) => {
     // prevent page refresh
     e.preventDefault();
 
@@ -119,7 +132,7 @@ const ListItem = ({ currentItem, setCurrentItems, currentItems }) => {
   }
   
   // handle display depending on editing state
-  const handleDisplay = (editingState) => {
+  const handleDisplay = (editingState: boolean) => {
 
     // display with edit input or without depending on state(currentlyEditing)
     if(editingState){
