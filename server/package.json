@@ -27,6 +27,8 @@
     "sequelize-cli": "^5.5.0"
   },
   "devDependencies": {
+    "@types/bluebird": "^3.5.27",
+    "@types/validator": "^10.11.3",
     "jasmine": "^3.4.0",
     "typescript": "^3.5.3"
   }

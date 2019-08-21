@@ -1,3 +1,4 @@
+"use strict";
 // File to import and initialize all routes for the api
 module.exports = {
     init: function (app) {

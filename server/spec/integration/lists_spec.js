@@ -1,10 +1,10 @@
 const axios = require('axios');
-const server = require('../../src/server');
+const server = require('../../build/server');
 
-const authHelpers = require('../../src/helpers/auth');
-const sequelize = require('../../src/db/models/index').sequelize;
-const List = require('../../src/db/models').List;
-const User = require('../../src/db/models').User;
+const authHelpers = require('../../build/helpers/auth');
+const sequelize = require('../../build/db/models/index').sequelize;
+const List = require('../../build/db/models').List;
+const User = require('../../build/db/models').User;
 const base = 'http://localhost:4000/lists/';
 
 

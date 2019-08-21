@@ -1,3 +1,4 @@
+"use strict";
 var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 module.exports = {

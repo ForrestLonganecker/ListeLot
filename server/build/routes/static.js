@@ -1,3 +1,4 @@
+"use strict";
 var express = require('express');
 // create a router
 var router = express.Router();

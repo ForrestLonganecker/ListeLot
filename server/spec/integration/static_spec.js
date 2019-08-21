@@ -1,5 +1,5 @@
 const axios = require('axios');
-const server = require('../../src/server');
+const server = require('../../build/server');
 
 const base = 'http://localhost:4000/';
 

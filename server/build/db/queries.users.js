@@ -1,3 +1,4 @@
+"use strict";
 var User = require('../db/models').User;
 module.exports = {
     createUser: function (newUser, callback) {

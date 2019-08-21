@@ -8,7 +8,7 @@ const server = http.createServer(app);
 
 server.listen(port);
 
-function normalizePort(val){
+function normalizePort(val: string){
   const port = parseInt(val, 10);
   if(isNaN(port)){
     return val;
@@ -22,3 +22,5 @@ function normalizePort(val){
 server.on('listening', () => {
   console.log(`ListeLot listening on port ${port}`);  
 });
+
+export {};

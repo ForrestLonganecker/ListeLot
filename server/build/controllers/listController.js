@@ -1,3 +1,4 @@
+"use strict";
 var authHelpers = require('../helpers/auth');
 var listQueries = require('../db/queries.lists');
 var userQueries = require('../db/queries.users');

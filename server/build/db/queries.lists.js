@@ -1,3 +1,4 @@
+"use strict";
 var List = require('../db/models').List;
 module.exports = {
     createList: function (newList, callback) {

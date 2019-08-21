@@ -1,3 +1,4 @@
+"use strict";
 // import helper functions
 var authHelpers = require('../helpers/auth');
 // import database manipulation functions

@@ -1,4 +1,5 @@
-express = require('express');
+"use strict";
+var express = require('express');
 var router = express.Router();
 var listController = require('../controllers/listController');
 router.post('/lists/create', listController.create);
