@@ -1,6 +1,10 @@
 'use strict';
+
+import { QueryInterface } from "sequelize/types";
+import { Sequelize } from "../models";
+
 module.exports = {
-  up: (queryInterface, Sequelize) => {
+  up: (queryInterface: QueryInterface, Sequelize: Sequelize) => {
     return queryInterface.createTable('Lists', {
       id: {
         allowNull: false,
@@ -12,7 +16,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      userId: {
+      userId: <any>{
         allowNull: false,
         type: Sequelize.INTEGER,
         onDelete: "CASCADE",
@@ -32,7 +36,7 @@ module.exports = {
       }
     });
   },
-  down: (queryInterface, Sequelize) => {
+  down: (queryInterface: QueryInterface, Sequelize: Sequelize) => {
     return queryInterface.dropTable('Lists');
   }
 };
