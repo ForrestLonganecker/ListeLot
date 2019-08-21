@@ -1,0 +1,30 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": null,
+    "database": "listelot-dev",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "operatorAliases": false,
+    "logging": false
+  },
+  "test": {
+    "username": "postgres",
+    "password": null,
+    "database": "listelot-test",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "operatorAliases": false,
+    "logging": false
+  },
+  "production": {
+    "username": "postgres",
+    "password": null,
+    "database": "listelot-production",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "operatorAliases": false,
+    "logging": false,
+    "use_env_variable": "DATABASE_URL"
+  }
+}

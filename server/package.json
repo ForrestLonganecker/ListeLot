@@ -2,9 +2,10 @@
   "name": "server",
   "version": "1.0.0",
   "description": "ListeLot server",
-  "main": "src/server.js",
+  "main": "build/server.js",
   "scripts": {
-    "start": "node src/server.js",
+    "start": "node build/server.js",
+    "build": "rm -rf build && tsc && mkdir build/db/config && cp src/db/config/config.json build/db/config/config.json",
     "test": "export NODE_ENV=test && jasmine",
     "env": "cp example.env .env"
   },
@@ -26,8 +27,7 @@
     "sequelize-cli": "^5.5.0"
   },
   "devDependencies": {
-    "eslint": "^6.1.0",
-    "eslint-plugin-jasmine": "^2.10.1",
-    "jasmine": "^3.4.0"
+    "jasmine": "^3.4.0",
+    "typescript": "^3.5.3"
   }
 }
