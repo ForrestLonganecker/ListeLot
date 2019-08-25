@@ -1,7 +1,11 @@
 // File to import and initialize all routes for the api
 
+interface App {
+  use: Function
+}
+
 module.exports = {
-  init(app: any){
+  init(app: App){
     const staticRoutes = require('../routes/static');
     const userRoutes = require('../routes/users');
     const listRoutes = require('../routes/lists');

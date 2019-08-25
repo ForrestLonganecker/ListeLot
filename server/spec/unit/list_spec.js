@@ -1,6 +1,6 @@
-const sequelize = require('../../build/db/models/index').sequelize;
-const User = require('../../build/db/models').User;
-const List = require('../../build/db/models').List;
+const sequelize = require('../../src/db/models/index').sequelize;
+const User = require('../../src/db/models').User;
+const List = require('../../src/db/models').List;
 
 describe('List', () => {
 

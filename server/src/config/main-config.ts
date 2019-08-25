@@ -3,8 +3,12 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
+interface App {
+  use: Function
+}
+
 module.exports = {
-  init(app: any){
+  init(app: App){
     app.use(logger('dev'));
     app.use(cors());
     app.use(bodyParser.json());
