@@ -1,10 +1,7 @@
 'use strict';
 
-import { QueryInterface } from "sequelize/types";
-import { Sequelize } from "../models";
-
 module.exports = {
-  up: (queryInterface: QueryInterface, Sequelize: Sequelize) => {
+  up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Users', {
       id: {
         allowNull: false,
@@ -34,7 +31,7 @@ module.exports = {
       }
     });
   },
-  down: (queryInterface: QueryInterface, Sequelize: Sequelize) => {
+  down: (queryInterface, Sequelize) => {
     return queryInterface.dropTable('Users');
   }
 };

@@ -1,5 +1,4 @@
 'use strict';
-Object.defineProperty(exports, "__esModule", { value: true });
 module.exports = {
     up: function (queryInterface, Sequelize) {
         return queryInterface.createTable('ListItems', {

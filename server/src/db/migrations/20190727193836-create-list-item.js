@@ -1,10 +1,7 @@
 'use strict';
 
-import { QueryInterface } from "sequelize/types";
-import { Sequelize } from "../models";
-
 module.exports = {
-  up: (queryInterface: QueryInterface, Sequelize: Sequelize) => {
+  up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('ListItems', {
       id: {
         allowNull: false,
@@ -25,7 +22,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         onDelete: 'CASCADE',
-        references: <any> {
+        references: {
           model: 'Lists',
           key: 'id',
           as: 'listId'
@@ -41,7 +38,7 @@ module.exports = {
       }
     });
   },
-  down: (queryInterface: QueryInterface, Sequelize: Sequelize) => {
+  down: (queryInterface, Sequelize) => {
     return queryInterface.dropTable('ListItems');
   }
 };
