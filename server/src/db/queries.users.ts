@@ -1,9 +1,14 @@
 const User = require('../db/models').User;
 
+interface User {
+  email: string,
+  password: string 
+}
+
 module.exports = {
-  createUser(newUser, callback){
+  createUser(newUser: User, callback: Function){
     User.findOne({where: {email: newUser.email}})
-    .then((user) => {
+    .then((user: User) => {
       if(user){
         callback('email already in use');
       } else {
@@ -11,19 +16,19 @@ module.exports = {
           email: newUser.email,
           password: newUser.password
         })
-        .then((user) => {
+        .then((user: User) => {
           callback(null, user);
         })
-        .catch((err) => {
-          let err = 'error creating user'
-          callback(err);
+        .catch((err: string) => {
+          let message = 'error creating user'
+          callback(message);
         });
       };
     });
   },
-  getUser(email, callback){
+  getUser(email: string, callback: Function){
     User.findOne({where: {email: email}})
-    .then((user) => {
+    .then((user: User) => {
       if(user){
         callback(null, user);
       } else {
@@ -31,7 +36,7 @@ module.exports = {
         callback(err);
       }
     })
-    .catch((err) => {
+    .catch((err: string) => {
       callback(err);
     });
   },

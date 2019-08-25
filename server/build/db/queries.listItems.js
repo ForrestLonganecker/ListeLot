@@ -33,7 +33,7 @@ module.exports = {
             .then(function () {
             ListItem.findByPk(updateInfo.listItemId)
                 .then(function (updatedListItem) {
-                var returnItem = updatedListItem, dataValues;
+                var returnItem = updatedListItem.dataValues;
                 callback(null, returnItem);
             })
                 .catch(function (err) {

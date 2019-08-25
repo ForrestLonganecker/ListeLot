@@ -1,12 +1,35 @@
 const List = require('../db/models').List;
 
+interface NewList {
+  title: string,
+  userId: number
+}
+
+interface List {
+  id: number,
+  title: string,
+  updatedAt: string,
+  createdAt: string
+}
+
+interface DeletedInfo {
+  userId: number,
+  listId: number
+}
+
+interface UpdatedInfo {
+  updatedTitle: string,
+  listId: number,
+  userId: number
+}
+
 module.exports = {
-  createList(newList, callback){
+  createList(newList: NewList, callback: Function){
     return List.create({
       title: newList.title,
       userId: newList.userId
     })
-    .then((list) => {
+    .then((list: List) => {
       // remove the user.id from returned list for security purposes
       let returnList = {
         id: list.id,
@@ -17,41 +40,41 @@ module.exports = {
 
       callback(null, returnList);
     })
-    .catch((err) => {
+    .catch((err: string) => {
       callback(err);
     });
   },
-  destroy(deletedInfo, callback){
+  destroy(deletedInfo: DeletedInfo, callback: Function){
     List.findOne({where: {
       userId: deletedInfo.userId,
       id: deletedInfo.listId
       }
     })
-    .then((list) => {
+    .then((list: List) => {
       if(list){
         List.destroy({where: {id: list.id}})
-        .then((deletedList) => {
+        .then((deletedList: Object) => {
           callback(null, deletedList);
         })
-        .catch((err) => {
+        .catch((err: string) => {
           callback(err);
         });
       }
     })
-    .catch((err) => {
+    .catch((err: string) => {
       callback(err);
     });
   },
-  update(updateInfo, callback){
+  update(updatedInfo: UpdatedInfo, callback: Function){
     List.update({
-      title: updateInfo.updatedTitle
+      title: updatedInfo.updatedTitle
     }, {where: {
-      id: updateInfo.listId,
-      userId: updateInfo.userId
+      id: updatedInfo.listId,
+      userId: updatedInfo.userId
     }})
     .then(() => {
-      List.findByPk(updateInfo.listId)
-      .then((updatedList) => {
+      List.findByPk(updatedInfo.listId)
+      .then((updatedList: List) => {
         let resultList = {
           title: updatedList.title,
           id: updatedList.id,
@@ -61,17 +84,17 @@ module.exports = {
 
         callback(null, resultList);
       })
-      .catch((err) => {
+      .catch((err: string) => {
         callback(err);
       })
     })
-    .catch((err) => {
+    .catch((err: string) => {
       callback(err);
     });
   },
-  getAll(userId, callback){
+  getAll(userId: number, callback: Function){
     List.findAll({where: {userId: userId}})
-    .then((lists) => {
+    .then((lists: Array<List>) => {
       let returnLists = lists.map((list) => {
         // remove userId from list
         let updatedItem = {
@@ -85,19 +108,19 @@ module.exports = {
 
       callback(null, returnLists);
     })
-    .catch((err) => {
+    .catch((err: string) => {
       callback(err);
     });
   },
-  getList(userId, listId, callback){
+  getList(userId: number, listId: number, callback: Function){
     List.findOne({where: {
       id: listId,
       userId: userId
     }})
-    .then((list) => {
+    .then((list: List) => {
       callback(null, list);
     })
-    .catch((err) => {
+    .catch((err: string) => {
       callback(err);
     });
   },

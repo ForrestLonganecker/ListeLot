@@ -41,15 +41,15 @@ module.exports = {
             callback(err);
         });
     },
-    update: function (updateInfo, callback) {
+    update: function (updatedInfo, callback) {
         List.update({
-            title: updateInfo.updatedTitle
+            title: updatedInfo.updatedTitle
         }, { where: {
-                id: updateInfo.listId,
-                userId: updateInfo.userId
+                id: updatedInfo.listId,
+                userId: updatedInfo.userId
             } })
             .then(function () {
-            List.findByPk(updateInfo.listId)
+            List.findByPk(updatedInfo.listId)
                 .then(function (updatedList) {
                 var resultList = {
                     title: updatedList.title,
