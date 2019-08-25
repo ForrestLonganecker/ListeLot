@@ -1,10 +1,35 @@
+export {}
+
 const sequelize = require('../../src/db/models/index').sequelize;
 const User = require('../../src/db/models').User;
 const List = require('../../src/db/models').List;
 
+interface ThisContext {
+  user: User,
+  list: List
+}
+
+interface User {
+  id: number
+}
+
+interface List {
+  title: string,
+  userId: number,
+  id: number
+}
+
+interface Err {
+  message: string
+}
+
+interface Res {
+
+}
+
 describe('List', () => {
 
-  beforeEach((done) => {
+  beforeEach(function(this: ThisContext, done){
     this.user;
     this.list;
 
@@ -14,27 +39,27 @@ describe('List', () => {
         email: 'test@email.com',
         password: '123456'
       })
-      .then((user) => {
+      .then((user: User) => {
         this.user = user;
         List.create({
           title: 'Test list',
           userId: this.user.id
         })
-        .then((list) => {
+        .then((list: List) => {
           this.list = list;
           done();
         })
-        .catch((err) => {
+        .catch((err: string) => {
           console.log(err);
           done();
         });
       })
-      .catch((err) =>{
+      .catch((err: string) =>{
         console.log(err);
         done();
       });
     })
-    .catch((err) => {
+    .catch((err: string) => {
       console.log(err);
       done();
     });
@@ -44,17 +69,17 @@ describe('List', () => {
 
   describe('#create()', () => {
 
-    it('should create a List object with the speficied userId', (done) => {
+    it('should create a List object with the speficied userId', function(this: ThisContext, done){
       List.create({
         title: 'Second list',
         userId: this.user.id
       })
-      .then((list) => {
+      .then((list: List) => {
         expect(list.title).toBe('Second list');
         expect(list.userId).toBe(1);
         done();
       })
-      .catch((err) => {
+      .catch((err: Err) => {
         expect(err).toBeNull();
         done();
       });
@@ -64,25 +89,25 @@ describe('List', () => {
       List.create({
         title: 'some title'
       })
-      .then((list) => {
-        expect(list).toBe(undefined);
+      .then((list: List) => {
+        expect(list).toBeUndefined();
         done();
       })
-      .catch((err) => {
+      .catch((err: Err) => {
         expect(err.message).toContain('List.userId cannot be null');
         done();
       });
     });
 
-    it('should not create a List without a title', (done) => {
+    it('should not create a List without a title', function(this: ThisContext, done){
       List.create({
         userId: this.user.id
       })
-      .then((list) => {
-        expect(list).toBe(undefined);
+      .then((list: List) => {
+        expect(list).toBeUndefined();
         done();
       })
-      .catch((err) => {
+      .catch((err: Err) => {
         expect(err.message).toContain('List.title cannot be null');
         done();
       });
@@ -93,27 +118,27 @@ describe('List', () => {
 
   describe('#destroy()', () => {
 
-    it('should destroy the list with associated list.id', (done) => {
+    it('should destroy the list with associated list.id', function(this: ThisContext, done){
       List.findOne({where: {userId: this.user.id}})
-      .then((list) => {
+      .then((list: List) => {
         expect(list.title).toBe('Test list');
         List.destroy({where: {id: list.id}})
-        .then((res) => {
+        .then((res: Res) => {
           expect(res).toBe(1);
           List.findOne({where: {userId: this.user.id}})
-          .then((deletedList) => {
+          .then((deletedList: List) => {
             expect(deletedList).toBeNull();
             done();
           })
-          .catch((err) => {
+          .catch((err: Err) => {
             expect(err).toBeNull();
           });
         })
-        .catch((err) => {
+        .catch((err: Err) => {
           expect(err).toBeNull();
         });
       })
-      .catch((err) => {
+      .catch((err: Err) => {
         expect(err).toBeNull();
       });
     });
@@ -123,23 +148,23 @@ describe('List', () => {
 
   describe('#update()', () => {
 
-    it('should update the title of the list with associated userId', (done) =>{
+    it('should update the title of the list with associated userId', function(this: ThisContext, done){
       List.update({
         title: 'updated title'
       }, {where: {id: this.list.id}})
       .then(() => {
         // update does not return useful data
         List.findByPk(this.list.id)
-        .then((list) => {
+        .then((list: List) => {
           expect(list.title).toBe('updated title');
           done();
         })
-        .catch((err) => {
+        .catch((err: Err) => {
           expect(err).toBeNull();
           done();
         });
       })
-      .catch((err) => {
+      .catch((err: Err) => {
         expect(err).toBeNull();
         done();
       });

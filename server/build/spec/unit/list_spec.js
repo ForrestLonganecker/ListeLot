@@ -1,12 +1,13 @@
 "use strict";
-var _this = this;
+Object.defineProperty(exports, "__esModule", { value: true });
 var sequelize = require('../../src/db/models/index').sequelize;
 var User = require('../../src/db/models').User;
 var List = require('../../src/db/models').List;
 describe('List', function () {
     beforeEach(function (done) {
-        _this.user;
-        _this.list;
+        var _this = this;
+        this.user;
+        this.list;
         sequelize.sync({ force: true })
             .then(function () {
             User.create({
@@ -43,7 +44,7 @@ describe('List', function () {
         it('should create a List object with the speficied userId', function (done) {
             List.create({
                 title: 'Second list',
-                userId: _this.user.id
+                userId: this.user.id
             })
                 .then(function (list) {
                 expect(list.title).toBe('Second list');
@@ -60,7 +61,7 @@ describe('List', function () {
                 title: 'some title'
             })
                 .then(function (list) {
-                expect(list).toBe(undefined);
+                expect(list).toBeUndefined();
                 done();
             })
                 .catch(function (err) {
@@ -70,10 +71,10 @@ describe('List', function () {
         });
         it('should not create a List without a title', function (done) {
             List.create({
-                userId: _this.user.id
+                userId: this.user.id
             })
                 .then(function (list) {
-                expect(list).toBe(undefined);
+                expect(list).toBeUndefined();
                 done();
             })
                 .catch(function (err) {
@@ -85,7 +86,8 @@ describe('List', function () {
     });
     describe('#destroy()', function () {
         it('should destroy the list with associated list.id', function (done) {
-            List.findOne({ where: { userId: _this.user.id } })
+            var _this = this;
+            List.findOne({ where: { userId: this.user.id } })
                 .then(function (list) {
                 expect(list.title).toBe('Test list');
                 List.destroy({ where: { id: list.id } })
@@ -112,9 +114,10 @@ describe('List', function () {
     });
     describe('#update()', function () {
         it('should update the title of the list with associated userId', function (done) {
+            var _this = this;
             List.update({
                 title: 'updated title'
-            }, { where: { id: _this.list.id } })
+            }, { where: { id: this.list.id } })
                 .then(function () {
                 // update does not return useful data
                 List.findByPk(_this.list.id)

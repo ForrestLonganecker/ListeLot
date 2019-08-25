@@ -1,14 +1,15 @@
 "use strict";
-var _this = this;
+Object.defineProperty(exports, "__esModule", { value: true });
 var sequelize = require('../../src/db/models/index').sequelize;
 var User = require('../../src/db/models').User;
 var List = require('../../src/db/models').List;
 var ListItem = require('../../src/db/models').ListItem;
 describe('ListItem', function () {
     beforeEach(function (done) {
-        _this.user;
-        _this.list;
-        _this.listItem;
+        var _this = this;
+        this.user;
+        this.list;
+        this.listItem;
         sequelize.sync({ force: true })
             .then(function () {
             User.create({
@@ -54,9 +55,10 @@ describe('ListItem', function () {
     });
     describe('#create()', function () {
         it('should create a ListItem with the associated text and listId', function (done) {
+            var _this = this;
             ListItem.create({
                 text: 'second test list item',
-                listId: _this.list.id
+                listId: this.list.id
             })
                 .then(function (listItem) {
                 expect(listItem.id).toBe(2);
@@ -76,6 +78,7 @@ describe('ListItem', function () {
             })
                 .then(function (listItem) {
                 // expect errors
+                expect(listItem).toBeNull();
                 done();
             })
                 .catch(function (err) {
@@ -87,10 +90,11 @@ describe('ListItem', function () {
     });
     describe('#destroy()', function () {
         it('should destroy the ListItem with the specified ID', function (done) {
-            ListItem.destroy({ where: { id: _this.listItem.id } })
-                .then(function (res) {
+            var _this = this;
+            ListItem.destroy({ where: { id: this.listItem.id } })
+                .then(function (deletedRows) {
                 // res = number of modified rows in the table
-                expect(res).toBe(1);
+                expect(deletedRows).toBe(1);
                 ListItem.findByPk(_this.listItem.id)
                     .then(function (listItem) {
                     expect(listItem).toBeNull();
@@ -110,10 +114,11 @@ describe('ListItem', function () {
     });
     describe('#update()', function () {
         it('should update the ListItem with the specified ID', function (done) {
+            var _this = this;
             ListItem.update({
                 text: 'updated text',
                 isComplete: true
-            }, { where: { id: _this.listItem.id } })
+            }, { where: { id: this.listItem.id } })
                 .then(function (res) {
                 // res = number of modified rows in the table
                 expect(res[0]).toBe(1);

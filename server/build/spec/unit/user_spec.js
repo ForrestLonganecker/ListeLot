@@ -1,10 +1,11 @@
 "use strict";
-var _this = this;
+Object.defineProperty(exports, "__esModule", { value: true });
 var sequelize = require('../../src/db/models/index').sequelize;
 var User = require('../../src/db/models').User;
 describe('User', function () {
     beforeEach(function (done) {
-        _this.user;
+        var _this = this;
+        this.user;
         sequelize.sync({ force: true })
             .then(function () {
             User.create({
@@ -42,24 +43,12 @@ describe('User', function () {
                 done();
             });
         });
-        it('should no create a User object with duplicate email address', function (done) {
-            User.create({
-                email: 'test@email.com',
-                password: '123456'
-            })
-                .then(function (user) {
-                done();
-            })
-                .catch(function (err) {
-                expect(err.msg).toContain('unique constraint violation');
-                done();
-            });
-        });
         // END CREATE USER TEST
     });
     describe('#destroy()', function () {
         it('should destroy user data for user with given id', function (done) {
-            User.destroy({ where: { id: _this.user.id } })
+            var _this = this;
+            User.destroy({ where: { id: this.user.id } })
                 .then(function () {
                 User.findByPk(_this.user.id)
                     .then(function (user) {
