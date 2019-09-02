@@ -4,7 +4,7 @@
   "description": "ListeLot server",
   "main": "build/server.js",
   "scripts": {
-    "start": "node build/server.js",
+    "start": "node build/src/server.js",
     "build": "rm -rf build && tsc && mkdir build/src/db/config && cp src/db/config/config.json build/src/db/config/config.json",
     "test": "export NODE_ENV=test && jasmine",
     "env": "cp example.env .env"
