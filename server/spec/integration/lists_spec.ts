@@ -11,9 +11,11 @@ const base = 'http://localhost:4000/lists/';
 
 interface ThisContext {
   user: User,
-  token: Object,
+  token: Token,
   list: List
 }
+
+interface Token {}
 
 interface User {
   id: number
